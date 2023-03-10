@@ -32,6 +32,7 @@
     margin: 0;
     font-family: 'Gotham Pro';
     text-decoration: none;
+    color: var(--m1-color);
 }
 
 body{
@@ -130,6 +131,11 @@ footer{
     font-weight: 800;
 }
 
+.txt-type-main{
+    font-size: 50px;
+    font-weight: 800;
+}
+
 .nav-button{
     position: relative;
     font-size: 32px;
@@ -193,6 +199,18 @@ footer{
 
 .txt-italic{
     font-style: italic;
+}
+
+.txt-center{
+    text-align: center;
+}
+
+.txt-left{
+    text-align: left;
+}
+
+.txt-right{
+    text-align: right;
 }
 
 
@@ -526,6 +544,7 @@ footer{
     background: none;
     padding: 7px 16px;
     transition: all .2s;
+    width: calc(100% - 32px);
 }
 
 /* Buttons */
@@ -533,12 +552,13 @@ footer{
 .btn-1{
     background-color: var(--b4-color);
     border-radius: 4px;
-    padding: 8.5px;
+    padding: 10px 18px;
     color: var(--m5-color);
     font-weight: 400px;
     font-size: 26px;
     border: none;
     transition: all .2s;
+    width: fit-content;
 }
 
 .btn-1:hover{
@@ -558,6 +578,7 @@ footer{
     font-size: 26px;
     border: none;
     transition: all .2s;
+    width: fit-content;
 }
 
 .btn-2:hover{
@@ -616,3 +637,6 @@ footer{
     justify-content: space-evenly;
 }
 
+.marg-auto{
+    margin: auto;
+}

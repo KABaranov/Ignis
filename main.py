@@ -15,5 +15,15 @@ def unregistered():
     return render_template('unregistered.html', title='Ignis')
 
 
+@app.route('/log-in', methods=['POST', 'GET'])
+def login():
+    return render_template('log-in.html')
+
+
+@app.route('/reg-in', methods=['POST', 'GET'])
+def regin():
+    return render_template('reg-in.html')
+
+
 if __name__ == '__main__':
     app.run(port=8000, host='127.0.0.1')
