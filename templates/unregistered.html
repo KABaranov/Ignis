@@ -1,4 +1,72 @@
 {% extends "base.html" %}
+{% block head %}<link rel="stylesheet" href="../static/css/unregistered.css">{% endblock %}
 {% block content %}
-    <div class="bg-cl-m1 sz-3"></div>
+    <!-- Welcome block -->
+    <div class="flex-col welcome just-spc-btw align-center">
+        <div class="flex-row just-spc-btw">
+            <!-- Banner -->
+            <div class="flex-col banner align-center just-center">
+                <h1 class="main-text txt-cl-p1">Ignis</h1>
+                <h1 class="banner-text">Социальная сеть для геймеров</h1>
+                <h1 class="banner-slogan txt-cl-p1">Больше не играй в одиночку</h1>
+            </div>
+            <!-- Text -->
+            <div class="flex-col info just-spc-eve align-center">
+                <h1 class="header-text">Присоединяйся</h1>
+                <h1 class="info-text">Общайтесь с друзьями или знакомтесь с новыми игроками в обсуждениях</h1>
+                <div class="info-line"></div>
+                <h1 class="header-text">Отзывы игроков</h1>
+                <h1 class="info-text">Обзоры для игроков, которые разделяют ваши увлечения, игры</h1>
+                <div class="info-line"></div>
+                <h1 class="header-text">Рекомендации</h1>
+                <h1 class="info-text">Находите темы относительно ваших игровых влечений</h1>
+            </div>
+        </div>
+        <div class="info-line"></div>
+    </div>
+
+    <!-- Phrase block -->
+    <div class="phrase flex-col align-center just-center">
+        <div class="flex-col just-spc-btw phrase-text">
+            <div class="txt-right flex-col align-end just-spc-btw">
+                    <h1 class="header-text">В поисках команды?</h1>
+                    <h1 class="info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mollis nunc quis mollis aliquet. Maecenas convallis arcu eleifend, tincidunt augue.</h1>
+            </div>
+            <div class="txt-left flex-col align-start just-spc-btw">
+                    <h1 class="header-text">Уже есть команда?</h1>
+                    <h1 class="info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mollis nunc quis mollis aliquet. Maecenas convallis arcu eleifend, tincidunt augue.</h1>
+            </div>
+            <div class="txt-right flex-col align-end just-spc-btw">
+                    <h1 class="header-text">Ищите тиммейтов по интересам</h1>
+                    <h1 class="info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mollis nunc quis mollis aliquet. Maecenas convallis arcu eleifend, tincidunt augue.</h1>
+            </div>
+            <div class="txt-left flex-col align-start just-spc-btw">
+                    <h1 class="header-text">Сразу можно связаться</h1>
+                    <h1 class="info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mollis nunc quis mollis aliquet. Maecenas convallis arcu eleifend, tincidunt augue.</h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cards -->
+    <div class="cards flex-row just-spc-btw txt-center">
+        <div class="card flex-col align-center">
+            <div class="card-number">1</div>
+            <div class="txt-black txt-type-1">Регистрируйся</div>
+            <div class="flex-row just-center">
+                <a href="log-in" class="nav-reg">Log-in</a>
+                <div class="nav-reg">/</div>
+                <a href="reg-in" class="txt-cl-p1 nav-reg">Reg-in</a>
+            </div>
+        </div>
+        <div class="card flex-col align-center">
+            <div class="card-number">2</div>
+            <div class="txt-black txt-type-1">Настрой поиск</div>
+            <div class="txt-type-3 txt-light">Подбери тиммейтов одного звания, возраста или даже из одного и того же города </div>
+        </div>
+        <div class="card flex-col align-center">
+            <div class="card-number">3</div>
+            <div class="txt-black txt-type-1">Выбирай тиммейтов</div>
+            <div class="txt-type-3 txt-light">Благодаря удобному поиску и мессенджеру возможно найти самых приятных людей себе в команду или микс</div>
+        </div>
+    </div>
 {% endblock %}

@@ -1,0 +1,254 @@
+body{
+    overflow-x: hidden;
+}
+.welcome{
+    margin-top: 10vh;
+    height: calc(90vh - 90px);
+    width: 80vw;
+    position: relative;
+}
+
+.welcome::before{
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: var(--p1-color);
+    left: 10vw;
+    top: -24px;
+}
+
+.welcome::after{
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: var(--p1-color);
+    right: 29.6vw;
+    bottom: 16vh;
+}
+
+
+.banner{
+    width: 50vw;
+    height: 72vh;
+    border: 4px solid var(--p1-color);
+    border-radius: 30px;
+    position: relative;
+    box-shadow: inset 0px 0px 14px 10px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.banner::before{
+    content: '';
+    position: absolute;
+    background: #FF5C5C;
+    filter: blur(200px);
+    width: 100px;
+    height: 100px;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.banner::after{
+    content: '';
+    position: absolute;
+    background: #FF5C5C;
+    filter: blur(200px);
+    width: 100px;
+    height: 100px;
+    bottom: 0;
+    right: 0;
+    z-index: -1;
+}
+
+.main-text{
+    font-family: 'Gotham Pro';
+    font-style: normal;
+    font-weight: 1000;
+    font-size: 90px;
+    line-height: 86px;
+}
+
+.banner>.main-text{
+    text-shadow: 0px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.banner-text{
+    font-family: 'Gotham Pro';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 60px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    margin: 30px;
+    width: 65%;
+}
+
+.banner-slogan{
+    font-family: 'Gotham Pro';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 40px;
+
+    width: 65%;
+}
+
+.info{
+    width: 30%;
+    text-align: center;
+}
+
+.header-text{
+    font-family: 'Gotham Pro';
+    font-style: normal;
+    font-weight: 1000;
+    font-size: 50px;
+    color: var(--p1-color);
+}
+
+.info-text{
+    font-family: 'Gotham Pro';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 30px;
+}
+
+.info-line{
+    height: 4px;
+    background-color: var(--p1-color);
+    position: relative;
+    width: 100%;
+}
+
+.info>.info-line{
+    width: 50%;
+}
+
+.info>.info-line:nth-of-type(1)::after{
+    content: '';
+    position: absolute;
+    background-color: var(--p1-color);
+    width: 4px;
+    height: 4px;
+    top: -4px;
+    left: 10%;
+}
+
+.info>.info-line:nth-of-type(2)::after{
+    content: '';
+    position: absolute;
+    background-color: var(--p1-color);
+    width: 4px;
+    height: 4px;
+    top: -14px;
+    right: 20%;
+}
+
+.info>.info-line:nth-of-type(2)::before{
+    content: '';
+    position: absolute;
+    background-color: var(--m5-color);
+    width: 8px;
+    height: 4px;
+    left: 15%;
+}
+
+.welcome>.info-line::after{
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    bottom: -14px;
+    left: 0;
+    background-color: var(--p1-color);
+}
+
+.phrase{
+    position: relative;
+    width: 90vw;
+    height: 205vh;
+}
+
+.phrase::before{
+    content: '';
+    position: absolute;
+    left: -5vw;
+    top: 30vh;
+    width: 100vw;
+    height: 150vh;
+    background: var(--m6-color);
+    transform: skew(0, -14deg);
+    z-index: -2;
+}
+
+.phrase::after{
+    content: '';
+    position: absolute;
+    left: -5vw;
+    top: 40vh;
+    width: 100vw;
+    height: 130vh;
+    background: var(--m7-color);
+    transform: skew(0, -14deg);
+    z-index: -1;
+}
+
+.phrase-text{
+    height: 60%;
+}
+
+.phrase-text>*>.header-text{
+    width: 60%;
+}
+
+.phrase-text>*>.info-text{
+    margin-top: 30px;
+    width: 54%;
+}
+
+.cards{
+    width: 90vw;
+    margin: 144px 0;
+}
+
+.card{
+    width: 25vw;
+    height: 25vw;
+    border-radius: 10px;
+    background-color: var(--m7-color);
+    position: relative;
+}
+
+.card::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    background-color: var(--m6-color);
+    z-index: -1;
+    top: -10px;
+    right: -10px;
+}
+
+.card>*{
+    width: 80%;
+    margin-top: 5%;
+}
+
+.card-number{
+    font-family: 'Gotham Pro';
+    font-style: normal;
+    font-weight: 1000;
+    font-size: 70px;
+    border: 5px dashed var(--p1-color);
+    border-radius: 100%;
+    width: 120px;
+    height: 120px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    margin-top: 10%;
+}
