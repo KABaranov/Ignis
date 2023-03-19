@@ -1,6 +1,7 @@
 body{
     overflow-x: hidden;
 }
+
 .welcome{
     margin-top: 10vh;
     height: calc(90vh - 90px);
@@ -67,7 +68,7 @@ body{
     font-family: 'Gotham Pro';
     font-style: normal;
     font-weight: 1000;
-    font-size: 90px;
+    font-size: calc(90vw / 19);
     line-height: 86px;
 }
 
@@ -79,7 +80,7 @@ body{
     font-family: 'Gotham Pro';
     font-style: normal;
     font-weight: 300;
-    font-size: 60px;
+    font-size: calc(60vw / 19);
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
     margin: 30px;
@@ -90,7 +91,7 @@ body{
     font-family: 'Gotham Pro';
     font-style: normal;
     font-weight: 300;
-    font-size: 40px;
+    font-size: calc(40vw / 19);
 
     width: 65%;
 }
@@ -104,7 +105,7 @@ body{
     font-family: 'Gotham Pro';
     font-style: normal;
     font-weight: 1000;
-    font-size: 50px;
+    font-size: calc(50vw / 19);
     color: var(--p1-color);
 }
 
@@ -112,7 +113,7 @@ body{
     font-family: 'Gotham Pro';
     font-style: normal;
     font-weight: 100;
-    font-size: 30px;
+    font-size: calc(30vw / 19);
 }
 
 .info-line{
@@ -242,11 +243,11 @@ body{
     font-family: 'Gotham Pro';
     font-style: normal;
     font-weight: 1000;
-    font-size: 70px;
+    font-size: calc(70vw / 19);
     border: 5px dashed var(--p1-color);
     border-radius: 100%;
-    width: 120px;
-    height: 120px;
+    width: calc(120vw / 19);
+    height: calc(120vw / 19);
     align-items: center;
     justify-content: center;
     display: flex;

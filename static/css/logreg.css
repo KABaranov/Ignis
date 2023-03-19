@@ -78,7 +78,7 @@ input{
 
 .rem-btn{
     font-weight: 200;
-    font-size: 12px;
+    font-size: calc(12vw / 19);
     color: var(--s1-color);
     margin-top: 9px;
     align-self: flex-end;
