@@ -6,8 +6,8 @@ from wtforms.validators import DataRequired
 
 
 app = Flask(__name__)
-csrf = CSRFProtect(app)
 app.config['SECRET_KEY'] = '$21aA9@1a4DZ&Z?dV02'
+csrf = CSRFProtect(app)
 
 
 @app.route('/')
@@ -22,6 +22,10 @@ def login():
 
 @app.route('/reg-in', methods=['POST', 'GET'])
 def regin():
+    if request.method == 'POST':
+        req = request.form.get('password-1')
+        print(req)
+        return 'dddddddddddddddddddd'
     return render_template('reg-in.html')
 
 
