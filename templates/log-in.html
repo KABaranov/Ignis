@@ -23,10 +23,11 @@
         <div class="line"></div>
         <div class="txt-type-main">Log - in</div>
         <form action="" method="post" class="flex-col align-center just-center" style="width: 50%; margin-top: 4px;">
-            <input type="email" class="input-1" placeholder="E-mail">
-            <input type="password" class="input-1" placeholder="Пароль">
+            <input type="email" name="email" class="input-1" placeholder="E-mail">
+            <input type="password" name="password" class="input-1" placeholder="Пароль">
             <a href="reg-in" class="rem-btn">Создать аккаунт</a>
             <input type="submit" value="Войти" class="btn-1">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         </form>
     </div>
 
