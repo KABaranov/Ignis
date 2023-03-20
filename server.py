@@ -6,6 +6,7 @@ from wtforms.validators import DataRequired
 
 
 app = Flask(__name__)
+# TODO: Перенести в переменное окружение
 app.config['SECRET_KEY'] = '$21aA9@1a4DZ&Z?dV02'
 csrf = CSRFProtect(app)
 
