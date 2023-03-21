@@ -40,3 +40,7 @@ def regin():
             return render_template('reg-in.html', message='Имя пользователя должно быть меньше 15 символов')
         return render_template('reg-in.html', message='Пользователь с таким именем/почтой уже существует')
     return render_template('reg-in.html')
+
+@app.route('/main')
+def main():
+    return render_template('main.html')
