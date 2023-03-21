@@ -1,10 +1,6 @@
 from flask import *
 from app import app
-from Ignis.app.database import *
-from flask_wtf import CSRFProtect
-
-
-csrf = CSRFProtect(app)
+from app.database import *
 
 
 @app.route('/test')
