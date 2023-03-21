@@ -29,6 +29,7 @@
             <input type="password" name="password-2" class="input-1" required placeholder="Подтвердите пароль">
             <a href="log-in" class="rem-btn">Уже есть аккаунт</a>
             <input type="submit" value="Регистрация" class="btn-1">
+            <h4 class="txt-cl-s1 txt-regular txt-center">{{ message }}</h4>
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         </form>
     </div>
