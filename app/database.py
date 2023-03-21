@@ -8,14 +8,14 @@ def hash_password(password):
     return hashlib.sha256(password.encode()).hexdigest()
 
 
-def db_connection(email, password):
+def db_connection(username, email, password):
     conn = sqlite3.connect('app/static/db/users.db')
     c = conn.cursor()
     # Хэширование пароля
     hashed_password = hash_password(password)
 
     # Проверка наличия имени пользователя в БД
-    c.execute('SELECT * FROM users WHERE email=?', (email,))
+    c.execute('SELECT * FROM users WHERE email=? OR username=?', (email, username))
     data = c.fetchone()
     return hashed_password, data, c, conn
 
@@ -24,7 +24,7 @@ def db_reg(username, email, password):
     if len(username) > 15:
         return 'TOO_MANY_SYMBOLS'
     # Соединение с БД
-    hashed_password, data, c, conn = db_connection(email, password)
+    hashed_password, data, c, conn = db_connection(username, email, password)
 
     # Если имя пользователя ещё не существует в БД, то проверяем пароль на соответствие
     if data:

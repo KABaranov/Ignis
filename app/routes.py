@@ -1,6 +1,6 @@
 from flask import *
 from app import app
-from Ignis.app.database import *
+from app.database import *
 
 
 @app.route('/test')
