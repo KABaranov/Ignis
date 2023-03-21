@@ -15,7 +15,10 @@ def db_connection(username, email, password):
     hashed_password = hash_password(password)
 
     # Проверка наличия имени пользователя в БД
-    c.execute('SELECT * FROM users WHERE email=? OR username=?', (email, username))
+    if username:
+        c.execute('SELECT * FROM users WHERE email=? OR username=?', (email, username))
+    else:
+        c.execute('SELECT * FROM users WHERE email=?', (email,))
     data = c.fetchone()
     return hashed_password, data, c, conn
 
@@ -40,9 +43,9 @@ def db_reg(username, email, password):
 
 def db_log(email, password):
     # Соединение с БД
-    hashed_password, data, _, conn = db_connection(email, password)
+    hashed_password, data, _, conn = db_connection(0, email, password)
     conn.close()
     # Если имя пользователя существует в БД, то проверяем пароль на соответствие
     if data and hashed_password == data[2]:
         return False
-    return True
+    return 'WRONG_PASSWORD_OR_EMAIL'

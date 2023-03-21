@@ -19,7 +19,7 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         if not db_log(email, password):
-            return render_template('base.html')
+            return redirect('/main')
         return 'Неправильное имя или пароль'
     return render_template('log-in.html')
 
@@ -29,11 +29,17 @@ def regin():
     if request.method == 'POST':
         nickname = request.form.get('nickname')
         email = request.form.get('email')
-        password = request.form.get('password-1')
-        reg = db_reg(nickname, email, password)
-        if not reg:
+        password1 = request.form.get('password-1')
+        password2 = request.form.get('password-2')
+        if password2 != password1:
+            return ''
+        error = db_reg(nickname, email, password1)
+        if not error:
             return render_template('base.html')
-        elif reg == 'TOO_MANY_SYMBOLS':
-            return 'МНогА'
-        return 'Занято'
+        return error
     return render_template('reg-in.html')
+
+
+@app.route('/main')
+def main():
+    return render_template('main.html')
