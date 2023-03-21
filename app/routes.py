@@ -1,6 +1,9 @@
 from flask import *
 from app import app
 from app.database import *
+from flask_wtf import CSRFProtect
+
+csrf = CSRFProtect(app)
 
 
 @app.route('/test')
@@ -19,8 +22,8 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         if not db_log(email, password):
-            return redirect('/main')
-        return 'Неправильное имя или пароль'
+            return render_template('base.html')
+        return render_template('log-in.html', message='Неправильное имя или пароль')
     return render_template('log-in.html')
 
 
@@ -29,17 +32,11 @@ def regin():
     if request.method == 'POST':
         nickname = request.form.get('nickname')
         email = request.form.get('email')
-        password1 = request.form.get('password-1')
-        password2 = request.form.get('password-2')
-        if password2 != password1:
-            return ''
-        error = db_reg(nickname, email, password1)
-        if not error:
+        password = request.form.get('password-1')
+        reg = db_reg(nickname, email, password)
+        if not reg:
             return render_template('base.html')
-        return error
+        elif reg == 'TOO_MANY_SYMBOLS':
+            return render_template('reg-in.html', message='Имя пользователя должно быть меньше 15 символов')
+        return render_template('reg-in.html', message='Пользователь с таким именем/почтой уже существует')
     return render_template('reg-in.html')
-
-
-@app.route('/main')
-def main():
-    return render_template('main.html')
