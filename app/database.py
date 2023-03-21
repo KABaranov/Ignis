@@ -1,5 +1,6 @@
 import sqlite3
 import hashlib
+from flask import url_for
 
 
 # Функция для хэширования пароля
@@ -8,7 +9,7 @@ def hash_password(password):
 
 
 def db_connection(email, password):
-    conn = sqlite3.connect('static/db/users.db')
+    conn = sqlite3.connect('app/static/db/users.db')
     c = conn.cursor()
     # Хэширование пароля
     hashed_password = hash_password(password)
@@ -17,6 +18,7 @@ def db_connection(email, password):
     c.execute('SELECT * FROM users WHERE email=?', (email,))
     data = c.fetchone()
     return hashed_password, data, c, conn
+
 
 def db_reg(username, email, password):
     if len(username) > 15:
