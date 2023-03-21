@@ -1,0 +1,16 @@
+.error-block{
+    width: 80vw;
+}
+
+.error-name{
+    font-size: calc(200vw / 19);
+}
+
+.error-text{
+    font-size: calc(40vw / 19);
+    margin-bottom: 2%;
+}
+
+.error-block>p>a{
+    font-size: calc(20vw / 19);
+}

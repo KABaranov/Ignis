@@ -1,0 +1,80 @@
+@import url('../fonts/gothampro.ttf');
+@import url('../fonts/gothampro_black.ttf');
+@import url('../fonts/gothampro_blackitalic.ttf');
+@import url('../fonts/gothampro_bold.ttf');
+@import url('../fonts/gothampro_bolditalic.ttf');
+@import url('../fonts/gothampro_italic.ttf');
+@import url('../fonts/gothampro_light.ttf');
+@import url('../fonts/gothampro_lightitalic.ttf');
+@import url('../fonts/gothampro_medium.ttf');
+@import url('../fonts/gothampro_mediumitalic.ttf');
+
+@font-face {
+    font-family: 'Gotham Pro';
+    src: url('../fonts/gothampro_medium.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham Pro';
+    src: url('../fonts/gothampro_black.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham Pro';
+    src: url('../fonts/gothampro.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham Pro';
+    src: url('../fonts/gothampro_light.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham Pro';
+    src: url('../fonts/gothampro_bold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham Pro';
+    src: url('../fonts/gothampro_mediumitalic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gotham Pro';
+    src: url('../fonts/gothampro_blackitalic.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gotham Pro';
+    src: url('../fonts/gothamproitalic_.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gotham Pro';
+    src: url('../fonts/gothampro_lightitalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Gotham Pro';
+    src: url('../fonts/gothampro_bolditalic.ttf') format('truetype');
+    font-weight: 600;
+    font-style: italic;
+}
