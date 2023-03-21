@@ -22,7 +22,7 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         if not db_log(email, password):
-            return render_template('base.html')
+            return redirect('/main')
         return render_template('log-in.html', message='Неправильное имя или пароль')
     return render_template('log-in.html')
 
@@ -40,6 +40,7 @@ def regin():
             return render_template('reg-in.html', message='Имя пользователя должно быть меньше 15 символов')
         return render_template('reg-in.html', message='Пользователь с таким именем/почтой уже существует')
     return render_template('reg-in.html')
+
 
 @app.route('/main')
 def main():
