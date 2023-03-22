@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block head %}
+    <link rel="stylesheet" href="../static/css/find.css">
+{% endblock %}
+{% block content %}
+
+    <!-- User card -->
+
+    <div class="user-card flex-row align-center just-center">
+        <div class="user-about">
+            <!-- Первые три обязательно будут показываться вне зависимости от игры -->
+            <div class="user-about-part flex-row">
+                <div class="txt-cl-p1 txt-medium txt-type-2">Лет:</div>
+                <div class="txt-regular txt-type-2">18</div>
+            </div>
+            <div class="user-about-part flex-row">
+                <div class="txt-cl-p1 txt-medium txt-type-2">Платформы:</div>
+                <div class="txt-regular txt-type-2">PC</div>
+            </div>
+            <div class="user-about-part flex-row">
+                <div class="txt-cl-p1 txt-medium txt-type-2">Часов в игре:</div>
+                <div class="txt-regular txt-type-2">2000-2500</div>
+            </div>
+            <div class="user-about-part">
+                <div class="txt-cl-p1 txt-medium txt-type-2">Пул карт:</div>
+                <div class="txt-regular txt-type-2">Mirage, Office, Nuke, Inferno, Overpass, Ancient</div>
+            </div>
+            <div class="user-about-part">
+                <div class="txt-cl-p1 txt-medium txt-type-2">Прайм тайм:</div>
+                <div class="txt-regular txt-type-2">
+                    <div>Понедельник: 16:00 - 22:00</div>
+                    <div>Вторник: 17:00 - 20:00</div>
+                    <div>Среда: 14:00 - 18:00</div>
+                    <div>Пятница: 12:00 - 15:00</div>
+                    <div>Суббота: 12:00 - 16:00</div>
+                </div>
+            </div>
+            <div class="user-about-part">
+                <div class="txt-cl-p1 txt-medium txt-type-2">О себе:</div>
+                <div class="txt-regular txt-type-2">IGL со стажем, очень крутая команда, с крутыми игроками и с крутой атмосферой! Йоу</div>
+            </div>
+        </div>
+        <div class="user-yn flex-col just-spc-btw align-center">
+            <img src="../static/img/profile/1.png" alt="Не удалось загрузить изображение" class="user-ico txt-type-4 bg-cl-m7 txt-center">
+            <div class="txt-cl-p1 txt-medium txt-type-2">Ar3nt1r</div>
+            <div class="txt-regular txt-type-3">Баранов Константин</div>
+            <div class="flex-row align-center just-spc-btw user-choice">
+                <div class="user-accept">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9429 19.0572L24.3906 7.60952C24.9113 7.08882 25.7556 7.08882 26.2763 7.60952C26.797 8.13022 26.797 8.97444 26.2763 9.49514L13.6347 22.1367C13.2526 22.5188 12.6332 22.5188 12.2512 22.1367L6.27627 16.1618C5.75557 15.6411 5.75557 14.7969 6.27627 14.2762C6.79697 13.7555 7.64119 13.7555 8.16188 14.2762L12.9429 19.0572Z" fill="var(--a2-color)"/>
+                    </svg>                        
+                </div>
+                <div class="user-decline">
+                    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16 14.1144L23.5425 6.57192C24.0632 6.05122 24.9074 6.05122 25.4281 6.57192C25.9488 7.09262 25.9488 7.93684 25.4281 8.45754L17.8856 16L25.4281 23.5425C25.9488 24.0632 25.9488 24.9074 25.4281 25.4281C24.9074 25.9488 24.0632 25.9488 23.5425 25.4281L16 17.8856L8.45754 25.4281C7.93684 25.9488 7.09262 25.9488 6.57192 25.4281C6.05122 24.9074 6.05122 24.0632 6.57192 23.5425L14.1144 16L6.57192 8.45754C6.05122 7.93684 6.05122 7.09262 6.57192 6.57192C7.09262 6.05122 7.93684 6.05122 8.45754 6.57192L16 14.1144Z" fill="var(--a1-color)"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search settings -->
+
+    <div class="search-settings flex-col">        
+        <div class="flex-row align-end just-spc-btw search-choice">
+            <div class="txt-type-3">Игрок</div>
+            <div class="switcher">
+                <input type="checkbox" id="player-team" />
+                <label for="player-team">Toggle</label>
+            </div>
+            <div class="txt-type-3">Команда</div>
+        </div>
+        <form class="settings flex-row just-spc-btw">
+            <div class="setting-main txt-type-3">
+                <div class="flex-row">
+                    Игра:
+                    <input type="text" class="input-1" name="game" id="game" list="games" placeholder="Игра">
+                    <datalist id="games">
+                        <option>CS:GO</option>
+                        <option>Dota 2</option>
+                        <option>Overwatch</option>
+                        <option>Rocket League</option>
+                    </datalist>
+                </div>
+                <div class="flex-row">
+                    Возраст:
+                    <div class="txt-regular">
+                        От
+                        <input class="input-1" type="number" name="age-of" id="age-of" min="1" max="99">
+                        До
+                        <input class="input-1" type="number" name="age-by" id="age-by" min="1" max="99">
+                    </div>
+                </div>
+                <div class="flex-row">
+                    Часов в игре:
+                    <div class="txt-regular">
+                        От
+                        <input class="input-1" type="number" name="hours-of" id="hours-of" min="0" max="10000">
+                        До
+                        <input class="input-1" type="number" name="hours-by" id="hours-by" min="0" max="10000">
+                    </div>
+                </div>
+                <div class="flex-row">
+                    Город:
+                    <input type="text" class="input-1" name="city" id="city" placeholder="Не обязательно">
+                </div>
+                <input type="submit" value="Поиск" class="btn-2">
+            </div>
+            <div class="flex-col align-start">
+                <div class="txt-type-3 txt-black">Выберите обязательные для игры дни</div>
+                <ul>
+                    <li class="checkbox">
+                      <input class="checkbox-pull" type="checkbox" id="monday"/>
+                      <label class="txt-type-4" for="monday"><span></span>Понедельник</label>
+                    </li>
+                    <li class="checkbox">
+                      <input class="checkbox-pull" type="checkbox" id="tuesday"/>
+                      <label class="txt-type-4" for="tuesday"><span></span>Вторник</label>
+                    </li>
+                    <li class="checkbox">
+                      <input class="checkbox-pull" type="checkbox" id="wednsday"/>
+                      <label class="txt-type-4" for="wednsday"><span></span>Среда</label>
+                    </li>
+                    <li class="checkbox">
+                      <input class="checkbox-pull" type="checkbox" id="thursday"/>
+                      <label class="txt-type-4" for="thursday"><span></span>Четверг</label>
+                    </li>
+                    <li class="checkbox">
+                      <input class="checkbox-pull" type="checkbox" id="friday"/>
+                      <label class="txt-type-4" for="friday"><span></span>Пятница</label>
+                    </li>
+                    <li class="checkbox">
+                      <input class="checkbox-pull" type="checkbox" id="saturday"/>
+                      <label class="txt-type-4" for="saturday"><span></span>Суббота</label>
+                    </li>
+                    <li class="checkbox">
+                      <input class="checkbox-pull" type="checkbox" id="sunday"/>
+                      <label class="txt-type-4" for="sunday"><span></span>Восресенье</label>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

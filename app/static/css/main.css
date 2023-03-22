@@ -75,7 +75,7 @@ footer{
 }
 
 .txt-type-2{
-    font-size: calc(28vw / 19)x;
+    font-size: calc(28vw / 19);
     font-weight: 800;
 }
 
@@ -546,6 +546,7 @@ footer{
     transition: all .2s;
     width: calc(100% - 32px);
 }
+
 
 /* Buttons */
 

@@ -8,7 +8,7 @@ csrf = CSRFProtect(app)
 
 @app.route('/test')
 def test():
-    return render_template('error/500.html', title='Ошибка')
+    return render_template('find.html', title='Поиск')
 
 
 @app.route('/')
