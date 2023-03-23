@@ -12,11 +12,20 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
     <script type="text/javascript" src="../static/modules/jquery-3.6.4.min.js"></script>
+    <script src="../static/js/preloader.js"></script>
     {% block head %}{% endblock %}
     <title>{{title}}</title>
 </head>
 <body>
 
+    <!-- Preloader -->
+
+    <div class="preloader-bg flex-col align-center just-center marg-auto">
+        <div id="preloader"></div>
+        <div class="txt-type-1 txt-cl-m1 preloader-txt">IGNIS</div>
+    </div>
+
+    
     <!--  NavBar -->
 
     <nav>
