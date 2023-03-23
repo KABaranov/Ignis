@@ -651,10 +651,12 @@ footer{
     height: 100vh;
     background-color: var(--m7-color);
     position: fixed;
+    z-index: 100;
 }
 
 .preloader-txt{
     position: fixed;
+    z-index: 101;
 }
 
 #preloader{
@@ -667,6 +669,7 @@ footer{
     position: fixed;
     animation-iteration-count: infinite;
     margin: auto;
+    z-index: 101;
 }
 
 
