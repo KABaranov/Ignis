@@ -51,5 +51,10 @@ def main():
 def choose_game():
     # TODO: связать gamelist с бд
     gamelist = {0: 'CS:GO', 1: 'Dota 2', 2: 'Rocket League', 3: 'Overwatch', 4: 'Minecraft', 5: 'Civilization VI',
-                6: 'HOI 4'}
-    return render_template('choosegame.html', gamelist=gamelist)
+                6: 'HOI IV'}
+    return render_template('choosegame.html', gamelist=gamelist, title='Игры пользователя')
+
+
+@app.route('/chat')
+def chat():
+    return render_template('chat.html', title='Мессенджер')

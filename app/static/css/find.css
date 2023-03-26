@@ -28,6 +28,7 @@
     width: 15.625vw;
     height: 15.625vw;
     border-radius: 100%;
+    position: relative;
 }
 
 .user-choice{
