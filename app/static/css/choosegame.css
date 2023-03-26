@@ -1,0 +1,39 @@
+form{
+    min-height: calc(100vh - 90px);
+}
+
+.games{
+    width: 90vw;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    justify-items: center;
+    align-items: center;
+}
+
+.game{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+}
+
+input[type=checkbox]{
+    visibility: hidden;
+    height: 0;
+    width: 0;
+}
+
+label{
+    cursor: pointer;
+    width: 75%;
+    padding: 20px;
+    border: 3px solid var(--p1-color);
+    border-radius: 10px;
+    transition: .3s;
+    text-align: center;
+}
+
+input:checked + label{
+    background-color: var(--p1-color);
+    color: var(--m5-color);
+}

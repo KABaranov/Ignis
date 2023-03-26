@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block head %}
+    <title>Игры пользователя</title>
+    <link rel="stylesheet" href="/static/css/choosegame.css">
+{% endblock %}
+{% block content %}
+    <form method="post" class="flex-col align-center just-spc-eve">
+        <h1>Выберите игры</h1>
+        <div class="games txt-type-3">
+            {% for i in gamelist %}
+                <div class="game">
+                    <input type="checkbox" name="game" id="{{ i }}">
+                    <label for="{{ i }}">{{ gamelist[i] }}</label>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="flex-row w-100 just-spc-btw">
+            <a href="/profile" class="btn-1">Назад</a>
+            <input type="submit" value="Сохранить" class="btn-2">
+        </div>
+    </form>
+{% endblock %}
