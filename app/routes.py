@@ -2,13 +2,16 @@ from flask import *
 from app import app
 from app.database import *
 from flask_wtf import CSRFProtect
+import json
 
 csrf = CSRFProtect(app)
 
 
 @app.route('/test')
 def test():
-    return render_template('find.html', title='Поиск')
+    with open('app/static/json/cities.json', 'r', encoding='utf-8') as f:
+        cities = json.load(f)
+    return render_template('find.html', title='Поиск', cities=cities)
 
 
 @app.route('/')

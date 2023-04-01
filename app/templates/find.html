@@ -104,7 +104,14 @@
                 </div>
                 <div class="flex-row">
                     Город:
-                    <input type="text" class="input-1" name="city" id="city" placeholder="Не обязательно">
+                    <input type="text" class="input-1" name="city" id="city" list="cities" placeholder="Не обязательно">
+                    <datalist id="cities">
+                        {% for i in cities %}
+                            {% for j in cities[i] %}
+                                <option>{{ j['name'] }}</option>
+                            {% endfor %}
+                        {% endfor %}
+                    </datalist>
                 </div>
                 <input type="submit" value="Поиск" class="btn-2">
             </div>
