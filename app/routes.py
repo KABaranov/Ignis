@@ -1,8 +1,8 @@
 from flask import *
 from app import app
-from app.database import *
 from flask_wtf import CSRFProtect
 import json
+from .static.db_data.db_api import *
 
 csrf = CSRFProtect(app)
 
@@ -24,9 +24,11 @@ def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
-        if not db_log(email, password):
+        log = db_log(email, password)
+        if log == 'SUCCESS':
             return redirect('/main')
-        return render_template('log-in.html', message='Неправильное имя или пароль')
+        elif log == 'WRONG_PASSWORD_OR_EMAIL':
+            return render_template('log-in.html', message='Неправильное имя или пароль')
     return render_template('log-in.html')
 
 
@@ -37,11 +39,12 @@ def regin():
         email = request.form.get('email')
         password = request.form.get('password-1')
         reg = db_reg(nickname, email, password)
-        if not reg:
+        if reg == 'SUCCESS':
             return render_template('base.html')
         elif reg == 'TOO_MANY_SYMBOLS':
             return render_template('reg-in.html', message='Имя пользователя должно быть меньше 15 символов')
-        return render_template('reg-in.html', message='Пользователь с таким именем/почтой уже существует')
+        elif reg == 'USER_EXISTS':
+            return render_template('reg-in.html', message='Пользователь с таким именем/почтой уже существует')
     return render_template('reg-in.html')
 
 
@@ -50,14 +53,26 @@ def main():
     return render_template('main.html')
 
 
+@app.route('/main/<int:ident>')
+def ident(ident):
+    return render_template('main.html', username=get_user_from_id(ident))
+
+
 @app.route('/profile/choose-game')
 def choose_game():
     # TODO: связать gamelist с бд
-    gamelist = {0: 'CS:GO', 1: 'Dota 2', 2: 'Rocket League', 3: 'Overwatch', 4: 'Minecraft', 5: 'Civilization VI',
-                6: 'HOI IV'}
+    gamelist = games()
     return render_template('choosegame.html', gamelist=gamelist, title='Игры пользователя')
 
 
 @app.route('/chat')
 def chat():
     return render_template('chat.html', title='Мессенджер')
+
+
+@app.route('/team/<link>')
+def team_search(link):
+    if link.isalpha():
+
+        render_template('')
+
