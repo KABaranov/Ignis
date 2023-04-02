@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+    
+{% block head %}
+    <link rel="stylesheet" href="/static/css/games.css">
+{% endblock %}
+{% block content %}
+    <div class="game-list">
+        {% for i in usergames %}
+            <a href="/game/{{ i }}" class="txt-type-2 bg-cl-m7">{{ gamelist[i] }}</a>
+        {% endfor %}
+        <a href="/profile/choose-game" class="txt-type-2 bg-cl-p1">+ Добавить игру</a>
+    </div>
+{% endblock %}

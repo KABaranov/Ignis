@@ -11,8 +11,8 @@
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
-    <script type="text/javascript" src="../static/modules/jquery-3.6.4.min.js"></script>
-    <script src="../static/js/preloader.js"></script>
+    <script type="text/javascript" src="/static/modules/jquery-3.6.4.min.js"></script>
+    <script type="text/javascript" src="/static/js/preloader.js"></script>
     {% block head %}{% endblock %}
     <title>{{title}}</title>
 </head>
@@ -32,17 +32,34 @@
         <div class="flex-row align-center just-spc-btw" style="width: 90vw">
             <div class="flex-row align-center just-start">
                 <div class="logo-3 logo-sz-1"></div>
-                <a href="/" class="nav-button txt-medium">Главная</a>
-                <a href="/profile/{{ id }}/friends" class="nav-button">Друзья</a>
-                <a href="/profile/{{ id }}/teams" class="nav-button">Команды</a>
-                <a href="/profile/{{ id }}/games" class="nav-button">Игры</a>
+                <a href="/main" class="nav-button txt-medium">Главная</a>
+                <a href="/profile/{{ current_user.id }}/friends" class="nav-button">Друзья</a>
+                <a href="/profile/{{ current_user.id }}/teams" class="nav-button">Команды</a>
+                <a href="/profile/{{ current_user.id }}/games" class="nav-button">Игры</a>
                 <a href="/chat" class="nav-button">Чат</a>
             </div>
-            <div class="flex-row just-end">
-                <a href="/log-in" class="nav-reg">Log-in</a>
-                <div class="nav-reg">/</div>
-                <a href="/reg-in" class="txt-cl-p1 nav-reg">Reg-in</a>
-            </div>
+            {% if current_user.id %}
+                <div class="flex-row just-end align-center">
+                    <a name="ico" href="/profile/{{ current_user.id }}" class="txt-type-3" style="margin-right: 20px">
+                        {{ current_user.nickname }}
+                    </a>
+                    {% if current_user.ico == 0 %}
+                        <div class="nav-user-ico txt-type-4 bg-cl-m7 txt-center">
+                            <div style="background: url(/static/img/profile/0.png) no-repeat center; background-size: cover; width: 100%; height: 100%; border-radius: 100%;"></div>
+                        </div>
+                    {% else %}
+                        <div class="nav-user-ico txt-type-4 bg-cl-m7 txt-center">
+                            <div style="background: url(/static/img/profile/{{ current_user.id }}.png) no-repeat center; background-size: cover; width: 100%; height: 100%; border-radius: 100%;"></div>
+                        </div>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div class="flex-row just-end">
+                    <a href="/log-in" class="nav-reg">Log-in</a>
+                    <div class="nav-reg">/</div>
+                    <a href="/reg-in" class="txt-cl-p1 nav-reg">Reg-in</a>
+                </div>
+            {% endif %}
         </div>
     </nav>
 

@@ -1,0 +1,20 @@
+.game-list{
+    margin-top: 100px;
+    width: 90vw;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.game-list>*{
+    padding: 10% 5%;
+    width: 85%;
+    cursor: pointer;
+}
+
+.game-list>*:hover{
+    background-color: var(--m6-color);
+}
+
+.game-list>*:last-child:hover{
+    background-color: var(--b2-color);
+}

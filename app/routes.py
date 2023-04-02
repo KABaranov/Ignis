@@ -12,6 +12,12 @@ login_manager.init_app(app)
 login_manager.login_view = '/log-in'
 
 
+@login_manager.user_loader
+def load_user(user_id):
+    session = db_session.create_session()
+    return session.query(User).get(user_id)
+
+
 @app.route('/test')
 def test():
     with open('app/static/json/cities.json', 'r', encoding='utf-8') as f:
@@ -22,12 +28,6 @@ def test():
 @app.route('/')
 def unregistered():
     return render_template('unregistered.html', title='Ignis')
-
-
-@login_manager.user_loader
-def load_user(user_id):
-    session = db_session.create_session()
-    return session.query(User).get(user_id)
 
 
 @app.route('/log-in', methods=['POST', 'GET'])
@@ -71,18 +71,45 @@ def regin():
 @app.route('/main')
 @login_required
 def main():
-    return render_template('main.html', username=current_user.nickname)
+    return render_template('main.html')
 
 
 @app.route('/main/<int:ident>')
+@login_required
 def ident(ident):
     return render_template('main.html', username=get_user_from_id(ident))
 
 
-@app.route('/profile/choose-game')
+@app.route('/profile/choose-game', methods=['GET', 'POST'])
+@login_required
 def choose_game():
+    # TODO передавать список игр пользователя сюда
+    usergames = [1, 2]
     gamelist = get_games()
-    return render_template('choosegame.html', gamelist=gamelist, title='Игры пользователя')
+    if request.method == 'POST':
+        # TODO: Связать лист с БД user-game
+        print(request.form.getlist('game'))
+        return redirect('/main')
+    return render_template('choosegame.html', gamelist=gamelist, title='Игры пользователя', usergames=usergames)
+
+
+@app.route('/profile/settings', methods=['GET', 'POST'])
+@login_required
+def profile_settings():
+    with open('app/static/json/cities.json', 'r', encoding='utf-8') as f:
+        cities = json.load(f)
+    if request.method == 'POST':
+        # TODO: Связать лист с БД user
+        print(request.form.get('surname'))
+        print(request.form.get('name'))
+        print(request.form.get('age'))
+        print(request.form.get('city'))
+        if request.form.get('look') == 1:
+            print(1)
+        else:
+            print(0)
+        return redirect('/main')
+    return render_template('profile_settings.html', title='Настройка профиля', cities=cities)
 
 
 @app.route('/chat')
@@ -95,6 +122,29 @@ def chat():
 @login_required
 def team_search(link):
     if link.isalpha():
-
         render_template('')
 
+
+@app.route('/profile/<int:ident>/games')
+@login_required
+def games(ident):
+    gamelist = get_games()
+    # TODO передавать список игр пользователя сюда
+    usergames = [1, 2]
+    return render_template('games.html', title=f'Игры {get_user_from_id(ident)}', usergames=usergames, gamelist=gamelist)
+
+
+@app.route('/profile/<int:ident>/teams')
+@login_required
+def teams(ident):
+    # TODO передавать список команд пользователя сюда
+    teamlist = [1,  2]
+    return render_template('teams.html', title=f'Команды {get_user_from_id(ident)}', teamlist=teamlist)
+
+
+@app.route('/profile/<int:ident>/friends')
+@login_required
+def friends(ident):
+    # TODO передавать список друзей пользователя сюда
+    friendlist = [2, 3]
+    return render_template('friends.html', title=f'Команды {get_user_from_id(ident)}', friendlist=friendlist)

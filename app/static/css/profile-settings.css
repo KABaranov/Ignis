@@ -1,0 +1,16 @@
+form{
+    margin-top: 1vw;
+    width: 30vw;
+}
+
+form>.txt-type-2{
+    margin-top: 1vw;
+}
+
+form>input, form>.flex-row{
+    margin-top: 0.5vw;
+}
+
+label{
+    margin-left: 10px;
+}

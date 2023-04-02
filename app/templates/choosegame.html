@@ -8,7 +8,11 @@
         <div class="games txt-type-3">
             {% for i in gamelist %}
                 <div class="game">
-                    <input type="checkbox" name="game" id="{{ i }}">
+                    <input type="checkbox" name="game" id="{{ i }}" value="{{ i }}"
+                    {% if i in usergames %}
+                    checked
+                    {% endif %}
+                    >
                     <label for="{{ i }}">{{ gamelist[i] }}</label>
                 </div>
             {% endfor %}
@@ -17,5 +21,6 @@
             <a href="/profile" class="btn-1">Назад</a>
             <input type="submit" value="Сохранить" class="btn-2">
         </div>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     </form>
 {% endblock %}

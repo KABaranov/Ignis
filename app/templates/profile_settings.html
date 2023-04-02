@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+    
+{% block head %}
+    <link rel="stylesheet" href="/static/css/profile-settings.css">
+{% endblock %}
+{% block content %}
+    <form method="post" class="txt-type-4">
+        <div class="txt-type-2">Фамилия</div>
+        <input type="text" name="surname" class="input-1" placeholder="Фамилия" maxlength="15">
+        <div class="txt-type-2">Имя</div>
+        <input type="text" name="name" class="input-1" placeholder="Имя" maxlength="15">
+        <div class="txt-type-2">Возраст</div>
+        <input type="number" name="age" class="input-1" placeholder="Возраст" min="10" max="99">
+        <div class="txt-type-2">Город</div>
+        <input type="text" class="input-1" name="city" id="city" list="cities" placeholder="Не обязательно">
+        <datalist id="cities">
+            {% for i in cities %}
+                {% for j in cities[i] %}
+                    <option>{{ j['name'] }}</option>
+                {% endfor %}
+            {% endfor %}
+        </datalist>
+        <div class="flex-row">
+            <input type="checkbox" name="look" id="look" value="1">
+            <label for="look">Ищете команду</label>
+        </div>
+
+        <input type="submit" class="btn-2"></input>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+    </form>
+{% endblock %}

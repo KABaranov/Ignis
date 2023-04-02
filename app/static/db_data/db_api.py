@@ -47,9 +47,8 @@ def get_user_from_id(ident):
 
 def get_games():
     session = db_session.create_session()
-    games = [elem.__dict__['name'] for elem in session.query(Game).all()]
+    games = {}
+    for elem in session.query(Game).all():
+        games[elem.__dict__['id']] = elem.__dict__['name']
     return games
-
-
-
 
