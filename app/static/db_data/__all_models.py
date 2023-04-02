@@ -2,9 +2,10 @@ import datetime
 import sqlalchemy
 from .db_session import SqlAlchemyBase
 from sqlalchemy_serializer import SerializerMixin
+from flask_login import UserMixin
 
 
-class User(SqlAlchemyBase):
+class User(SqlAlchemyBase, UserMixin):
     __tablename__ = 'users'
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
@@ -20,9 +21,6 @@ class User(SqlAlchemyBase):
     about = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     created_date = sqlalchemy.Column(sqlalchemy.DateTime,
                                      default=datetime.datetime.now)
-
-    def __repr__(self):
-        return str(self.id)# [self.id, self.nickname, self.email, self.surname, self.name, self.age, self.age, self.city, self.look_for, self.about, self.created_date]
 
 
 class Team(SqlAlchemyBase, SerializerMixin):
@@ -42,6 +40,9 @@ class Game(SqlAlchemyBase):
     name = sqlalchemy.Column(sqlalchemy.String,
                              unique=True)
 
+    def __repr__(self):
+        return self.name
+
 
 class UsersToTeams(SqlAlchemyBase):
     __tablename__ = 'users_to_teams'
@@ -51,3 +52,35 @@ class UsersToTeams(SqlAlchemyBase):
     id_user = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
     role = sqlalchemy.Column(sqlalchemy.String)
 
+
+class GameSearchParams(SqlAlchemyBase):
+    __tablename__ = 'game_search_params'
+    id = sqlalchemy.Column(sqlalchemy.Integer,
+                           primary_key=True, autoincrement=True)
+    id_game = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('game.id'))
+    parameter = sqlalchemy.Column(sqlalchemy.String)
+
+
+class TeamsToGames(SqlAlchemyBase):
+    __tablename__ = 'teams_to_games'
+    id = sqlalchemy.Column(sqlalchemy.Integer,
+                           primary_key=True, autoincrement=True)
+    id_team = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('teams.id'))
+    id_game = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('game.id'))
+
+
+class UsersToGames(SqlAlchemyBase):
+    __tablename__ = 'users_to_games'
+    id = sqlalchemy.Column(sqlalchemy.Integer,
+                           primary_key=True, autoincrement=True)
+    id_user = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
+    id_game = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('games.id'))
+
+
+class UsersToUsers(SqlAlchemyBase):
+    __tablename__ = 'users_to_users'
+    id = sqlalchemy.Column(sqlalchemy.Integer,
+                           primary_key=True, autoincrement=True)
+    id_user = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
+    id_friend = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
+    request_status = sqlalchemy.Column(sqlalchemy.Integer, default=0)

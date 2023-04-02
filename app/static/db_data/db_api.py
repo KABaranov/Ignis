@@ -36,8 +36,8 @@ def db_log(email, password):
     session = db_session.create_session()
     user = session.query(User).filter(User.email == email.lower(), User.password == hash_password(password)).first()
     if not user:
-        return 'WRONG_PASSWORD_OR_EMAIL'
-    return 'SUCCESS'
+        return 'WRONG_PASSWORD_OR_EMAIL', None
+    return 'SUCCESS', user
 
 
 def get_user_from_id(ident):
@@ -45,6 +45,10 @@ def get_user_from_id(ident):
     user = session.query(User).filter(User.id == ident).first().__dict__
     return user['nickname']
 
+
+def get_games():
+    session = db_session.create_session()
+    return session.query(Game).all()
 
 
 
