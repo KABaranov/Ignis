@@ -1,7 +1,6 @@
 import datetime
 import sqlalchemy
 from .db_session import *
-from sqlalchemy_serializer import SerializerMixin
 from flask_login import UserMixin
 
 
@@ -17,10 +16,11 @@ class User(SqlAlchemyBase, UserMixin):
     name = sqlalchemy.Column(sqlalchemy.String)
     age = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
     city = sqlalchemy.Column(sqlalchemy.String, nullable=True)
-    look_for = sqlalchemy.Column(sqlalchemy.Boolean, default=False)
+    look_for = sqlalchemy.Column(sqlalchemy.Integer, default=0)
     about = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     created_date = sqlalchemy.Column(sqlalchemy.DateTime,
                                      default=datetime.datetime.now)
+    ico = sqlalchemy.Column(sqlalchemy.Integer, default=0)
 
 
 class Team(SqlAlchemyBase):
@@ -31,6 +31,7 @@ class Team(SqlAlchemyBase):
                              unique=True)
     owner = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
     link = sqlalchemy.Column(sqlalchemy.String, unique=True, nullable=True)
+    ico = sqlalchemy.Column(sqlalchemy.Integer, default=0)
 
 
 class Game(SqlAlchemyBase):
@@ -57,7 +58,7 @@ class GameSearchParams(SqlAlchemyBase):
     __tablename__ = 'game_search_params'
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
-    id_game = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('game.id'))
+    id_game = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('games.id'))
     parameter = sqlalchemy.Column(sqlalchemy.String)
 
 
@@ -66,7 +67,7 @@ class TeamsToGames(SqlAlchemyBase):
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
     id_team = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('teams.id'))
-    id_game = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('game.id'))
+    id_game = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('games.id'))
 
 
 class UsersToGames(SqlAlchemyBase):

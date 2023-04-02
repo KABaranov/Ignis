@@ -4,7 +4,6 @@ import hashlib
 from . import db_session
 from .__all_models import *
 
-
 db_session.global_init("app/static/db/users.db")
 
 
