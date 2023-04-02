@@ -1,6 +1,6 @@
 import datetime
 import sqlalchemy
-from .db_session import SqlAlchemyBase
+from .db_session import *
 from sqlalchemy_serializer import SerializerMixin
 from flask_login import UserMixin
 
@@ -23,7 +23,7 @@ class User(SqlAlchemyBase, UserMixin):
                                      default=datetime.datetime.now)
 
 
-class Team(SqlAlchemyBase, SerializerMixin):
+class Team(SqlAlchemyBase):
     __tablename__ = 'teams'
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True, nullable=True)
