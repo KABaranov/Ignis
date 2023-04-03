@@ -21,8 +21,8 @@ class User(SqlAlchemyBase, UserMixin):
     created_date = sqlalchemy.Column(sqlalchemy.DateTime,
                                      default=datetime.datetime.now)
     ico = sqlalchemy.Column(sqlalchemy.Integer, default=0)
-    # TODO Заполнен ли профиль
-    # full = sqlalchemy.Column(sqlalchemy.Integer, default=0)
+    # Заполнен ли профиль
+    full = sqlalchemy.Column(sqlalchemy.Integer, default=0)
 
 class Team(SqlAlchemyBase):
     __tablename__ = 'teams'
@@ -33,8 +33,7 @@ class Team(SqlAlchemyBase):
     owner = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
     link = sqlalchemy.Column(sqlalchemy.String, unique=True, nullable=True)
     ico = sqlalchemy.Column(sqlalchemy.Integer, default=0)
-    # TODO публичная/частная команда
-    # publish = sqlalchemy.Column(sqlalchemy.Integer, default=0)
+    publish = sqlalchemy.Column(sqlalchemy.Integer, default=0)
 
 
 class Game(SqlAlchemyBase):

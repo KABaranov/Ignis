@@ -71,7 +71,9 @@ def regin():
 @app.route('/main')
 @login_required
 def main():
-    return render_template('main.html')
+    with open('app/static/json/cities.json', 'r', encoding='utf-8') as f:
+        cities = json.load(f)
+    return render_template('find.html', title='Поиск', cities=cities)
 
 
 @app.route('/main/<int:ident>')
