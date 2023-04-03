@@ -131,9 +131,8 @@ def games(ident):
 @app.route('/profile/<int:ident>/teams')
 @login_required
 def teams(ident):
-    teamlist = get_user_teams(ident)
     return render_template('teams.html', nickname=get_user_from_id(ident),
-                           teamlist=teamlist, ident=ident)
+                           teamlist=get_user_teams(ident), ident=ident)
 
 
 @app.route('/profile/<int:ident>/friends')
@@ -152,10 +151,9 @@ def create_team():
         link = '-'.join(request.form.get('link').lower().split())
         game = get_id_from_game(request.form.get('game'))
         public = 1 if request.form.get('public') == "1" else 0
-        # print(any(elem.isalpha() for elem in link))
-        # print(team_is_unique(name, link))
         if any(elem.isalpha() for elem in link) and team_is_unique(name, link):
             add_team(game, name, current_user, link, public)
             return redirect(f'/profile/{current_user.id}/teams')
+        # TODO придумать ошибку
         return 'придумать ошибку'
     return render_template('create_team.html', gamelist=get_games())

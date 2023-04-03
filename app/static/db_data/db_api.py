@@ -88,7 +88,8 @@ def team_is_unique(name, link):
 
 
 def get_user_teams(ident):
-    teams = session.query(Team).filter(UsersToTeams.id_user == ident).all()
+    teams = [session.query(Team).filter(Team.id == elem).first() for elem in [elem.id_team for elem in
+                                                                              session.query(UsersToTeams).filter(UsersToTeams.id_user == ident).all()]]
     return teams
 
 
@@ -103,7 +104,8 @@ def update_profile(user, name, surname, age, city, look_for):
 
 
 def get_user_friends(ident):
-    friends = [elem.id_friend for elem in session.query(User).filter(UsersToUsers.id_user == ident, UsersToUsers.request_status == 1).all()]
+    friends = [session.query(User).filter(User.id == elem).first() for elem in [elem.id_friend for elem in
+                                                                              session.query(UsersToUsers).filter(UsersToUsers.id_user == ident).all()]]
     return friends
 
 
