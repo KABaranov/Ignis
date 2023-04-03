@@ -17,14 +17,14 @@
     margin-left: 20px;
 }
 
-.team-list>*:hover{
+.team:hover{
     background-color: var(--m6-color);
 }
 
-.team-list>*:last-child{
+.create-team{
     padding: 10% 5%;
 }
 
-.team-list>*:last-child:hover{
+.create-team:hover{
     background-color: var(--b3-color);
 }

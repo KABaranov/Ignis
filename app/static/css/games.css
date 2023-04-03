@@ -5,17 +5,17 @@
     grid-template-columns: repeat(4, 1fr);
 }
 
-.game-list>*{
+.game, .add-game{
     margin-top: 20px;
     padding: 10% 5%;
     width: 85%;
     cursor: pointer;
 }
 
-.game-list>*:hover{
+.game:hover{
     background-color: var(--m6-color);
 }
 
-.game-list>*:last-child:hover{
+.add-game:hover{
     background-color: var(--b3-color);
 }

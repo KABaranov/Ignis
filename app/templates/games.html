@@ -9,10 +9,10 @@
     <div class="txt-type-1">Игры {{ nickname }}</div>
         <div class="game-list">
             {% for i in usergames %}
-                <a href="/profile/{{ ident }}/games/{{ i }}" class="txt-type-2 bg-cl-m7">{{ gamelist[i] }}</a>
+                <a href="/profile/{{ ident }}/games/{{ i }}" class="txt-type-2 bg-cl-m7 game">{{ gamelist[i] }}</a>
             {% endfor %}
             {% if ident == current_user.id %}
-                <a href="/profile/choose-game" class="txt-type-2 bg-cl-p1">+ Добавить игру</a>
+                <a href="/profile/choose-game" class="txt-type-2 bg-cl-p1 add-game">+ Добавить игру</a>
             {% endif %}
         </div>
     </div>

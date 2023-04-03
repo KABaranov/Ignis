@@ -98,7 +98,6 @@ def profile_settings():
     with open('app/static/json/cities.json', 'r', encoding='utf-8') as f:
         cities = json.load(f)
     if request.method == 'POST':
-        # TODO Поменять отображение кнопки добавить игру
         surname = request.form.get('surname')
         name = request.form.get('name')
         age = request.form.get('age')
@@ -140,7 +139,6 @@ def teams(ident):
 @app.route('/profile/<int:ident>/friends')
 @login_required
 def friends(ident):
-    # TODO передавать список друзей пользователя сюда (Передавать объекты, а не названия)
     friendlist = get_user_friends(ident)
     return render_template('friends.html', nickname=get_user_from_id(ident),
                            friendlist=friendlist, ident=ident)
