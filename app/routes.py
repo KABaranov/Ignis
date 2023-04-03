@@ -89,8 +89,8 @@ def choose_game():
     if request.method == 'POST':
         # TODO: Связать лист с БД user-game
         print(request.form.getlist('game'))
-        return redirect('/main')
-    return render_template('choosegame.html', gamelist=gamelist, title='Игры пользователя', usergames=usergames)
+        return redirect(f'/profile/{current_user.id}/games')
+    return render_template('choosegame.html', gamelist=gamelist, title='Выбор игр', usergames=usergames)
 
 
 @app.route('/profile/settings', methods=['GET', 'POST'])
@@ -104,7 +104,7 @@ def profile_settings():
         print(request.form.get('name'))
         print(request.form.get('age'))
         print(request.form.get('city'))
-        if request.form.get('look') == 1:
+        if request.form.get('look') == '1':
             print(1)
         else:
             print(0)
@@ -151,3 +151,20 @@ def friends(ident):
     friendlist = [2, 3]
     return render_template('friends.html', nickname=get_user_from_id(ident),
                            friendlist=friendlist, ident=ident)
+
+
+@app.route('/create-team', methods=['GET', 'POST'])
+@login_required
+def create_team():
+    # TODO связать с БД
+    #  - проверять на уникальность имя и ссылку
+    #  - проверять чтобы в ссылке была хотя бы одна буква
+    if request.method == 'POST':
+        print(request.form.get('name'))
+        print('-'.join(request.form.get('link').lower().split()))
+        if request.form.get('public') == "1":
+            print(1)
+        else:
+            print(0)
+        return  redirect(f'/profile/{current_user.id}/teams')
+    return render_template('create_team.html')

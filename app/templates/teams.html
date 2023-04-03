@@ -8,7 +8,6 @@
     <div class="flex-col align-center" style="margin-top: 50px;">
     <div class="txt-type-1">Команды {{ nickname }}</div>
         <div class="team-list">
-            <!-- TODO: Взять циклом название/id команды -->
             {% for team in teamlist %}
                 <a href="/team/{{ team.id }}" class="txt-type-2 bg-cl-m7 flex-row align-center">
                     {% if team.ico == 0 %}

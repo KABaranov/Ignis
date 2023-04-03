@@ -2,13 +2,12 @@
     
 {% block head %}
     <link rel="stylesheet" href="/static/css/teams.css">
-    <title>Команды {{ nickname }}</title>
+    <title>Друзья {{ nickname }}</title>
 {% endblock %}
 {% block content %}
     <div class="flex-col align-center" style="margin-top: 50px;">
-    <div class="txt-type-1">Команды {{ nickname }}</div>
+    <div class="txt-type-1">Друзья {{ nickname }}</div>
         <div class="team-list">
-            <!-- TODO: Взять циклом название/id команды -->
             {% for friend in friendlist %}
                 <a href="/profile/{{ friend.id }}" class="txt-type-2 bg-cl-m7 flex-row align-center">
                     {% if friend.ico == 0 %}
