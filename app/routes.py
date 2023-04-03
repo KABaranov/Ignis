@@ -22,7 +22,7 @@ def load_user(user_id):
 def test():
     with open('app/static/json/cities.json', 'r', encoding='utf-8') as f:
         cities = json.load(f)
-    return render_template('find.html', title='Поиск', cities=cities)
+    return render_template('find.html', title='Поиск', cities=cities, gamelist=get_games())
 
 
 @app.route('/')
@@ -73,7 +73,7 @@ def regin():
 def main():
     with open('app/static/json/cities.json', 'r', encoding='utf-8') as f:
         cities = json.load(f)
-    return render_template('find.html', title='Поиск', cities=cities)
+    return render_template('find.html', title='Поиск', cities=cities, gamelist=get_games())
 
 
 @app.route('/main/<int:ident>')
@@ -164,9 +164,11 @@ def create_team():
     if request.method == 'POST':
         print(request.form.get('name'))
         print('-'.join(request.form.get('link').lower().split()))
+        # TODO взять id по названию
+        print(request.form.get('game'))
         if request.form.get('public') == "1":
             print(1)
         else:
             print(0)
         return  redirect(f'/profile/{current_user.id}/teams')
-    return render_template('create_team.html')
+    return render_template('create_team.html', gamelist=get_games())

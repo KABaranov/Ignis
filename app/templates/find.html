@@ -78,10 +78,9 @@
                     Игра:
                     <input type="text" class="input-1" name="game" id="game" list="games" placeholder="Игра">
                     <datalist id="games">
-                        <option>CS:GO</option>
-                        <option>Dota 2</option>
-                        <option>Overwatch</option>
-                        <option>Rocket League</option>
+                        {% for i in gamelist %}
+                            <option>{{ gamelist[i] }}</option>
+                        {% endfor %}
                     </datalist>
                 </div>
                 <div class="flex-row">
