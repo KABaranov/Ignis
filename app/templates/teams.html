@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+    
+{% block head %}
+    <link rel="stylesheet" href="/static/css/teams.css">
+    <title>Команды {{ nickname }}</title>
+{% endblock %}
+{% block content %}
+    <div class="flex-col align-center" style="margin-top: 50px;">
+    <div class="txt-type-1">Команды {{ nickname }}</div>
+        <div class="team-list">
+            <!-- TODO: Взять циклом название/id команды -->
+            {% for team in teamlist %}
+                <a href="/team/{{ team.id }}" class="txt-type-2 bg-cl-m7 flex-row align-center">
+                    {% if team.ico == 0 %}
+                        <div class="nav-user-ico txt-type-4 bg-cl-m5 txt-center">
+                            <div style="background: url(/static/img/team/0.png) no-repeat center; background-size: cover; width: 100%; height: 100%; border-radius: 100%;"></div>
+                        </div>
+                    {% else %}
+                        <div class="nav-user-ico txt-type-4 bg-cl-m5 txt-center">
+                            <div style="background: url(/static/img/team/{{ team.id }}.png) no-repeat center; background-size: cover; width: 100%; height: 100%; border-radius: 100%;"></div>
+                        </div>
+                    {% endif %}
+                    <div class="team-name">123 {{ team.name }}</div>
+                </a>
+            {% endfor %}
+            {% if ident == current_user.id %}
+                <a href="/create-team" class="txt-type-2 bg-cl-p1">+ Создать команду</a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

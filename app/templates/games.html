@@ -2,12 +2,18 @@
     
 {% block head %}
     <link rel="stylesheet" href="/static/css/games.css">
+    <title>Игры {{ nickname }}</title>
 {% endblock %}
 {% block content %}
-    <div class="game-list">
-        {% for i in usergames %}
-            <a href="/game/{{ i }}" class="txt-type-2 bg-cl-m7">{{ gamelist[i] }}</a>
-        {% endfor %}
-        <a href="/profile/choose-game" class="txt-type-2 bg-cl-p1">+ Добавить игру</a>
+    <div class="flex-col align-center" style="margin-top: 50px;">
+    <div class="txt-type-1">Игры {{ nickname }}</div>
+        <div class="game-list">
+            {% for i in usergames %}
+                <a href="/profile/{{ ident }}/games/{{ i }}" class="txt-type-2 bg-cl-m7">{{ gamelist[i] }}</a>
+            {% endfor %}
+            {% if ident == current_user.id %}
+                <a href="/profile/choose-game" class="txt-type-2 bg-cl-p1">+ Добавить игру</a>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

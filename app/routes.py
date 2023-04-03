@@ -130,21 +130,24 @@ def team_search(link):
 def games(ident):
     gamelist = get_games()
     # TODO передавать список игр пользователя сюда
-    usergames = [1, 2]
-    return render_template('games.html', title=f'Игры {get_user_from_id(ident)}', usergames=usergames, gamelist=gamelist)
+    usergames = [1, 2, 1, 1, 1]
+    return render_template('games.html', nickname=get_user_from_id(ident), usergames=usergames,
+                           gamelist=gamelist, ident=ident)
 
 
 @app.route('/profile/<int:ident>/teams')
 @login_required
 def teams(ident):
-    # TODO передавать список команд пользователя сюда
-    teamlist = [1,  2]
-    return render_template('teams.html', title=f'Команды {get_user_from_id(ident)}', teamlist=teamlist)
+    # TODO передавать список команд пользователя сюда (Передавать объекты, а не названия)
+    teamlist = [1,  2, 3, 4, 5]
+    return render_template('teams.html', nickname=get_user_from_id(ident),
+                           teamlist=teamlist, ident=ident)
 
 
 @app.route('/profile/<int:ident>/friends')
 @login_required
 def friends(ident):
-    # TODO передавать список друзей пользователя сюда
+    # TODO передавать список друзей пользователя сюда  (Передавать объекты, а не названия)
     friendlist = [2, 3]
-    return render_template('friends.html', title=f'Команды {get_user_from_id(ident)}', friendlist=friendlist)
+    return render_template('friends.html', nickname=get_user_from_id(ident),
+                           friendlist=friendlist, ident=ident)

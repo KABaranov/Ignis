@@ -1,21 +1,30 @@
-.game-list{
+.team-list{
     margin-top: 50px;
     width: 90vw;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
 }
 
-.game-list>*{
+.team-list>*{
     margin-top: 20px;
-    padding: 10% 5%;
+    padding: 7% 5%;
     width: 85%;
     cursor: pointer;
+    align-self: center;
 }
 
-.game-list>*:hover{
+.team-name{
+    margin-left: 20px;
+}
+
+.team-list>*:hover{
     background-color: var(--m6-color);
 }
 
-.game-list>*:last-child:hover{
+.team-list>*:last-child{
+    padding: 10% 5%;
+}
+
+.team-list>*:last-child:hover{
     background-color: var(--b3-color);
 }
