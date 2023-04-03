@@ -24,6 +24,7 @@ class User(SqlAlchemyBase, UserMixin):
     # Заполнен ли профиль
     full = sqlalchemy.Column(sqlalchemy.Integer, default=0)
 
+
 class Team(SqlAlchemyBase):
     __tablename__ = 'teams'
     id = sqlalchemy.Column(sqlalchemy.Integer,
@@ -33,7 +34,7 @@ class Team(SqlAlchemyBase):
     owner = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
     link = sqlalchemy.Column(sqlalchemy.String, unique=True, nullable=True)
     ico = sqlalchemy.Column(sqlalchemy.Integer, default=0)
-    publish = sqlalchemy.Column(sqlalchemy.Integer, default=0)
+    public = sqlalchemy.Column(sqlalchemy.Integer, default=0)
 
 
 class Game(SqlAlchemyBase):

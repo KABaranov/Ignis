@@ -85,14 +85,11 @@ def ident(ident):
 @app.route('/profile/choose-game', methods=['GET', 'POST'])
 @login_required
 def choose_game():
-    # TODO передавать список игр пользователя сюда
-    usergames = [1, 2]
-    gamelist = get_games()
     if request.method == 'POST':
         # TODO: Связать лист с БД user-game
-        print(request.form.getlist('game'))
+        add_games_to_user(request.form.getlist('game'), current_user)
         return redirect(f'/profile/{current_user.id}/games')
-    return render_template('choosegame.html', gamelist=gamelist, title='Выбор игр', usergames=usergames)
+    return render_template('choosegame.html', gamelist=get_games(), title='Выбор игр', usergames=get_user_games(current_user.id))
 
 
 @app.route('/profile/settings', methods=['GET', 'POST'])
@@ -130,11 +127,8 @@ def team_search(link):
 @app.route('/profile/<int:ident>/games')
 @login_required
 def games(ident):
-    gamelist = get_games()
-    # TODO передавать список игр пользователя сюда
-    usergames = [1, 2, 1, 1, 1]
-    return render_template('games.html', nickname=get_user_from_id(ident), usergames=usergames,
-                           gamelist=gamelist, ident=ident)
+    return render_template('games.html', nickname=get_user_from_id(ident), usergames=get_user_games(ident),
+                           gamelist=get_games(), ident=ident)
 
 
 @app.route('/profile/<int:ident>/teams')
@@ -158,17 +152,15 @@ def friends(ident):
 @app.route('/create-team', methods=['GET', 'POST'])
 @login_required
 def create_team():
-    # TODO связать с БД
-    #  - проверять на уникальность имя и ссылку
-    #  - проверять чтобы в ссылке была хотя бы одна буква
     if request.method == 'POST':
-        print(request.form.get('name'))
-        print('-'.join(request.form.get('link').lower().split()))
-        # TODO взять id по названию
-        print(request.form.get('game'))
-        if request.form.get('public') == "1":
-            print(1)
-        else:
-            print(0)
-        return  redirect(f'/profile/{current_user.id}/teams')
+        name = request.form.get('name')
+        link = '-'.join(request.form.get('link').lower().split())
+        game = get_id_from_game(request.form.get('game'))
+        public = 1 if request.form.get('public') == "1" else 0
+        # print(any(elem.isalpha() for elem in link))
+        # print(team_is_unique(name, link))
+        if any(elem.isalpha() for elem in link) and team_is_unique(name, link):
+            add_team(game, name, current_user.id, link, public)
+            return redirect(f'/profile/{current_user.id}/teams')
+        return 'придумать ошибку'
     return render_template('create_team.html', gamelist=get_games())
