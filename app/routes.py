@@ -86,10 +86,10 @@ def ident(ident):
 @login_required
 def choose_game():
     if request.method == 'POST':
-        # TODO: Связать лист с БД user-game
         add_games_to_user(request.form.getlist('game'), current_user)
         return redirect(f'/profile/{current_user.id}/games')
-    return render_template('choosegame.html', gamelist=get_games(), title='Выбор игр', usergames=get_user_games(current_user.id))
+    return render_template('choosegame.html', gamelist=get_games(), title='Выбор игр',
+                           usergames=get_user_games(current_user.id))
 
 
 @app.route('/profile/settings', methods=['GET', 'POST'])
@@ -98,15 +98,13 @@ def profile_settings():
     with open('app/static/json/cities.json', 'r', encoding='utf-8') as f:
         cities = json.load(f)
     if request.method == 'POST':
-        # TODO: Связать лист с БД user
-        print(request.form.get('surname'))
-        print(request.form.get('name'))
-        print(request.form.get('age'))
-        print(request.form.get('city'))
-        if request.form.get('look') == '1':
-            print(1)
-        else:
-            print(0)
+        # TODO Поменять отображение кнопки добавить игру
+        surname = request.form.get('surname')
+        name = request.form.get('name')
+        age = request.form.get('age')
+        city = request.form.get('city')
+        look_for = 1 if request.form.get('look') == '1' else 0
+        update_profile(current_user, name, surname, age, city, look_for)
         return redirect('/main')
     return render_template('profile_settings.html', title='Настройка профиля', cities=cities)
 
@@ -134,8 +132,7 @@ def games(ident):
 @app.route('/profile/<int:ident>/teams')
 @login_required
 def teams(ident):
-    # TODO передавать список команд пользователя сюда (Передавать объекты, а не названия)
-    teamlist = [1,  2, 3, 4, 5]
+    teamlist = get_user_teams(ident)
     return render_template('teams.html', nickname=get_user_from_id(ident),
                            teamlist=teamlist, ident=ident)
 
@@ -143,8 +140,8 @@ def teams(ident):
 @app.route('/profile/<int:ident>/friends')
 @login_required
 def friends(ident):
-    # TODO передавать список друзей пользователя сюда  (Передавать объекты, а не названия)
-    friendlist = [2, 3]
+    # TODO передавать список друзей пользователя сюда (Передавать объекты, а не названия)
+    friendlist = get_user_friends(ident)
     return render_template('friends.html', nickname=get_user_from_id(ident),
                            friendlist=friendlist, ident=ident)
 
@@ -160,7 +157,7 @@ def create_team():
         # print(any(elem.isalpha() for elem in link))
         # print(team_is_unique(name, link))
         if any(elem.isalpha() for elem in link) and team_is_unique(name, link):
-            add_team(game, name, current_user.id, link, public)
+            add_team(game, name, current_user, link, public)
             return redirect(f'/profile/{current_user.id}/teams')
         return 'придумать ошибку'
     return render_template('create_team.html', gamelist=get_games())

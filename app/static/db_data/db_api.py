@@ -43,20 +43,20 @@ def get_user_from_id(ident):
 
 
 def get_id_from_game(name):
-    game = session.query(Game).filter(Game.name == name).first().__dict__
-    return game['id']
+    game = session.query(Game).filter(Game.name == name).first()
+    return game.id
 
 
 def get_games():
     games = {}
     for elem in session.query(Game).all():
-        games[elem.__dict__['id']] = elem.__dict__['name']
+        games[elem.id] = elem.name
     return games
 
 
 def get_user_games(ident):
     games_to_user = session.query(UsersToGames).filter(UsersToGames.id_user == ident).all()
-    games = [elem.__dict__['id_game'] for elem in games_to_user]
+    games = [elem.id_game for elem in games_to_user]
     return games
 
 
@@ -69,26 +69,42 @@ def add_games_to_user(games, user):
 
 
 def add_team(game, name, owner, link, public):
-    team = Team(name=name, owner=owner, link=link, public=public)
+    team = Team(name=name, owner=owner.id, link=link, public=public)
     session.add(team)
     session.commit()
-    team = session.query(Team).filter(Team.name == name).first().__dict__['id']
+    team = session.query(Team).filter(Team.name == name).first().id
     game_to_team = TeamsToGames(id_game=game, id_team=team)
+    user_to_team = UsersToTeams(id_user=owner.id, id_team=team)
+    session.add(user_to_team)
     session.add(game_to_team)
     session.commit()
 
 
 def team_is_unique(name, link):
-    print(name)
-    print(link)
     team = session.query(Team).filter((Team.name == name) | (Team.link == link)).first()
     if team:
-        # print(team.__dict__)
         return False
     return True
 
 
-# def get_user_teams(user):
+def get_user_teams(ident):
+    teams = session.query(Team).filter(UsersToTeams.id_user == ident).all()
+    return teams
+
+
+def update_profile(user, name, surname, age, city, look_for):
+    old_user = session.query(User).filter(User.id == user.id).first()
+    user = {key: value for key, value in old_user.__dict__.items()
+                if key not in ["user", "name", "surname", "age", "city", "look_for", "_sa_instance_state"]}
+    new_user = User(name=name, surname=surname, age=age, city=city, look_for=look_for, **user)
+    session.delete(old_user)
+    session.add(new_user)
+    session.commit()
+
+
+def get_user_friends(ident):
+    friends = [elem.id_friend for elem in session.query(User).filter(UsersToUsers.id_user == ident, UsersToUsers.request_status == 1).all()]
+    return friends
 
 
 

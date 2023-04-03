@@ -54,7 +54,7 @@ class UsersToTeams(SqlAlchemyBase):
                            primary_key=True, autoincrement=True)
     id_team = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('teams.id'))
     id_user = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
-    role = sqlalchemy.Column(sqlalchemy.String)
+    role = sqlalchemy.Column(sqlalchemy.String, default='Участник')
 
 
 class GameSearchParams(SqlAlchemyBase):
