@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="/static/css/profile-settings.css">
 {% endblock %}
 {% block content %}
-    <form method="post" class="txt-type-4 flex-col align-center just-spc-aro">
+    <form method="post" class="txt-type-4 flex-col align-center just-spc-aro" enctype=multipart/form-data>
         {% if current_user.ico == 0 %}
         <div class="user-img flex-row align-center just-center" id="user-img" style="background: no-repeat center url(/static/img/profile/0.png); background-size: cover;">
             <input type="file" name="image-load" id="image-load" accept="image/*,.pdf" />

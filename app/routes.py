@@ -10,6 +10,7 @@ csrf = CSRFProtect(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = '/log-in'
+MAX_FILE_SIZE = 1024 * 1024 + 1
 
 
 @login_manager.user_loader
@@ -103,7 +104,22 @@ def profile_settings():
         age = request.form.get('age')
         city = request.form.get('city')
         look_for = 1 if request.form.get('look') == '1' else 0
+        if name and surname and age and city:
+            session.query(User).get(current_user.id).full = 1
+            session.commit()
         update_profile(current_user, name, surname, age, city, look_for)
+
+        # TODO Если пользователь не выбирает картинку и нажимает кнопку, то ава меняется на пустую, фикс
+        img = request.files['image-load']
+        file_bytes = img.read()
+        if len(file_bytes) < MAX_FILE_SIZE:
+            with open(f"app/static/img/profile/{current_user.id}.png", 'wb') as f:
+                f.write(file_bytes)
+            session.query(User).get(current_user.id).ico = 1
+            session.commit()
+        else:
+            return 'eeeee'  # TODO Придумать ошибку
+
         return redirect('/main')
     return render_template('profile_settings.html', title='Настройка профиля', cities=cities)
 
