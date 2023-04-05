@@ -173,3 +173,13 @@ def create_team():
         # TODO придумать ошибку
         return 'придумать ошибку'
     return render_template('create_team.html', gamelist=get_games())
+
+
+@app.route('/profile/<int:ident>')
+@login_required
+def profile(ident):
+    user = get_user_object(ident)
+    m = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа',
+         'Сентября', 'Октября', 'Ноября', 'Декабря']
+    date = f'{user.created_date.day} {m[user.created_date.month - 1]} {user.created_date.year} года'
+    return render_template('profile.html', user=user, date=date)

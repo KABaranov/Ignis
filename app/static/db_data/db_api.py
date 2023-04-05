@@ -42,6 +42,10 @@ def get_user_from_id(ident):
     return user['nickname']
 
 
+def get_user_object(ident):
+    user = session.query(User).filter(User.id == ident).first()
+    return user
+
 def get_id_from_game(name):
     game = session.query(Game).filter(Game.name == name).first()
     return game.id

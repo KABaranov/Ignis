@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block head %}
+    <title>Профиль</title>
+{% endblock %}
+{% block content %}
+    {% if user.ico == 0 %}
+        <div class="nav-user-ico txt-type-4 bg-cl-m7 txt-center">
+            <div style="background: url(/static/img/profile/0.png) no-repeat center; background-size: cover; width: 100%; height: 100%; border-radius: 100%;"></div>
+        </div>
+    {% else %}
+        <div class="nav-user-ico txt-type-4 bg-cl-m7 txt-center">
+            <div style="background: url(/static/img/profile/{{ current_user.id }}.png) no-repeat center; background-size: cover; width: 100%; height: 100%; border-radius: 100%;"></div>
+        </div>
+    {% endif %}
+    <div class="txt-type-1 txt-cl-p1 txt-medium bg-cl-m7" style="padding: 5px;">{{ user.nickname }}</div>
+    <div class="txt-type-3 bg-cl-m7 txt-regular" style="padding: 5px;">Участвует с {{ date }}</div>
+{% endblock %}
