@@ -3,11 +3,11 @@ form{
     width: 90vw;
 }
 
-form>*>.txt-type-2{
+.flex-col>.txt-type-2{
     margin-top: 1vw;
 }
 
-form>*>input, form>.flex-row{
+.flex-col>input, .flex-col>.flex-row, .flex-col>textarea{
     margin-top: 0.5vw;
 }
 

@@ -4,42 +4,49 @@
     <link rel="stylesheet" href="/static/css/profile-settings.css">
 {% endblock %}
 {% block content %}
-    <form method="post" class="txt-type-4 flex-col align-center just-spc-aro" enctype=multipart/form-data>
-        {% if current_user.ico == 0 %}
-        <div class="user-img flex-row align-center just-center" id="user-img" style="background: no-repeat center url(/static/img/profile/0.png); background-size: cover;">
-            <input type="file" name="image-load" id="image-load" accept="image/*,.pdf" />
-            <label for="image-load"></label>
-        </div>
-        {% else %}
-        <div class="user-img flex-row align-center just-center" id="user-img" style="background: no-repeat center url(/static/img/profile/{{ current_user.id }}.png); background-size: cover;">
-            <input type="file" name="image-load" id="image-load" accept="image/*,.pdf" />
-            <label for="image-load"></label>
-        </div>
-        {% endif %}
-        <input type="button" value="Удалить" class="btn-2" style="margin-top: 10px;">
-        <div class="flex-col">
-            <div class="txt-type-2">Фамилия</div>
-            <input type="text" name="surname" class="input-1" placeholder="Фамилия" maxlength="15" value="{{ current_user.surname }}">
-            <div class="txt-type-2">Имя</div>
-            <input type="text" name="name" class="input-1" placeholder="Имя" maxlength="15" value="{{ current_user.name }}">
-            <div class="txt-type-2">Возраст</div>
-            <input type="number" name="age" class="input-1" placeholder="Возраст" min="10" max="99" value="{{ current_user.age }}">
-            <div class="txt-type-2">Город</div>
-            <input type="text" class="input-1" name="city" id="city" list="cities" placeholder="Не обязательно" value="{{ current_user.city }}">
-            <datalist id="cities">
-            {% for i in cities %}
-                {% for j in cities[i] %}
-                    <option>{{ j['name'] }}</option>
+    <form method="post" class="txt-type-4 flex-row just-spc-aro" enctype=multipart/form-data>
+        <div class="flex-col align-center just-spc-eve">
+            <div class="flex-col">
+                <div class="txt-type-2">Фамилия</div>
+                <input type="text" name="surname" class="input-1" placeholder="Фамилия" maxlength="15" value="{{ current_user.surname }}">
+                <div class="txt-type-2">Имя</div>
+                <input type="text" name="name" class="input-1" placeholder="Имя" maxlength="15" value="{{ current_user.name }}">
+                <div class="txt-type-2">Возраст</div>
+                <input type="number" name="age" class="input-1" placeholder="Возраст" min="10" max="99" value="{{ current_user.age }}">
+                <div class="txt-type-2">Город</div>
+                <input type="text" class="input-1" name="city" id="city" list="cities" placeholder="Не обязательно" value="{{ current_user.city }}">
+                <datalist id="cities">
+                {% for i in cities %}
+                    {% for j in cities[i] %}
+                        <option>{{ j['name'] }}</option>
+                    {% endfor %}
                 {% endfor %}
-            {% endfor %}
-            </datalist>
-            <div class="flex-row">
-                <input type="checkbox" name="look" id="look" value="1" checked>
-                <label for="look">Ищете команду</label>
+                </datalist>
+                <div class="flex-row">
+                    <input type="checkbox" name="look" id="look" value="1" checked>
+                    <label for="look">Ищете команду</label>
+                </div>
             </div>
             <input type="submit" class="btn-1" value="Сохранить">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         </div>
-        
-        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <div class="flex-col" style="width: 40%;">
+            <div class="flex-col align-center">
+                {% if current_user.ico == 0 %}
+                <div class="user-img flex-row align-center just-center" id="user-img" style="background: no-repeat center url(/static/img/profile/0.png); background-size: cover;">
+                    <input type="file" name="image-load" id="image-load" accept="image/*,.pdf" />
+                    <label for="image-load"></label>
+                </div>
+                {% else %}
+                <div class="user-img flex-row align-center just-center" id="user-img" style="background: no-repeat center url(/static/img/profile/{{ current_user.id }}.png); background-size: cover;">
+                    <input type="file" name="image-load" id="image-load" accept="image/*,.pdf" />
+                    <label for="image-load"></label>
+                </div>
+                {% endif %}
+                <input type="button" value="Удалить" class="btn-2" style="margin-top: 10px;">
+            </div>
+            <label for="about" class="txt-type-2">О себе</label>
+            <textarea type="text" name="about" id="about" class="input-1" placeholder="Будет отображаться в профиле" maxlength="300" style="width: 100%; min-height: max-content; resize: none;" rows="5"></textarea>
+        </div>
     </form>
 {% endblock %}
