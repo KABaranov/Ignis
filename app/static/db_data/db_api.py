@@ -97,11 +97,11 @@ def get_user_teams(ident):
     return teams
 
 
-def update_profile(user, name, surname, age, city, look_for):
+def update_profile(user, name, surname, age, city, look_for, about):
     old_user = session.query(User).filter(User.id == user.id).first()
     user = {key: value for key, value in old_user.__dict__.items()
-                if key not in ["user", "name", "surname", "age", "city", "look_for", "_sa_instance_state"]}
-    new_user = User(name=name, surname=surname, age=age, city=city, look_for=look_for, **user)
+                if key not in ["user", "name", "surname", "age", "city", "look_for", "about", "_sa_instance_state"]}
+    new_user = User(name=name, surname=surname, age=age, city=city, look_for=look_for, about=about, **user)
     session.delete(old_user)
     session.add(new_user)
     session.commit()

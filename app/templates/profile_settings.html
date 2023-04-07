@@ -2,6 +2,22 @@
     
 {% block head %}
     <link rel="stylesheet" href="/static/css/profile-settings.css">
+    <script type=text/javascript>
+        $(function() {
+          $('#delete').on('click', function(e) {
+            $('#user-img').css('background-image', 'url(/static/img/profile/0.png)')
+            e.preventDefault()
+            $.getJSON('/delete-profile-img',
+                function(data) {
+              //do nothing
+            });
+            return false;
+          });
+          $('#image-load').on('change', function(){
+            $('#user-img').css('background-image', 'url(' + window.URL.createObjectURL(this.files[0]) + ')')
+          });
+        });
+    </script>
 {% endblock %}
 {% block content %}
     <form method="post" class="txt-type-4 flex-row just-spc-aro" enctype=multipart/form-data>
@@ -43,10 +59,10 @@
                     <label for="image-load"></label>
                 </div>
                 {% endif %}
-                <input type="button" value="Удалить" class="btn-2" style="margin-top: 10px;">
+                <input type="button" value="Удалить" name="delete" id="delete" class="btn-2" style="margin-top: 10px;">
             </div>
             <label for="about" class="txt-type-2">О себе</label>
-            <textarea type="text" name="about" id="about" class="input-1" placeholder="Будет отображаться в профиле" maxlength="300" style="width: 100%; min-height: max-content; resize: none;" rows="5"></textarea>
+            <textarea name="about" id="about" class="input-1" placeholder="Будет отображаться в профиле" maxlength="300" style="width: 100%; min-height: max-content; resize: none;" rows="5">{{current_user.about}}</textarea>
         </div>
     </form>
 {% endblock %}

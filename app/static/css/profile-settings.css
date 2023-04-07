@@ -75,3 +75,7 @@ input[type=file] + label:before{
 input[type=file] + label:hover{
     opacity: 100%;
 }
+
+footer{
+    margin-top: 20px
+}

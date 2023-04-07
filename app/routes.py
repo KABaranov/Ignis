@@ -4,6 +4,7 @@ from flask_wtf import CSRFProtect
 import json
 from .static.db_data.db_api import *
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
+import os
 
 csrf = CSRFProtect(app)
 
@@ -104,24 +105,36 @@ def profile_settings():
         age = request.form.get('age')
         city = request.form.get('city')
         look_for = 1 if request.form.get('look') == '1' else 0
+        about = request.form.get('about')
         if name and surname and age and city:
             session.query(User).get(current_user.id).full = 1
             session.commit()
-        update_profile(current_user, name, surname, age, city, look_for)
+        update_profile(current_user, name, surname, age, city, look_for, about)
 
-        # TODO Если пользователь не выбирает картинку и нажимает кнопку, то ава меняется на пустую, фикс
         img = request.files['image-load']
-        file_bytes = img.read()
-        if len(file_bytes) < MAX_FILE_SIZE:
-            with open(f"app/static/img/profile/{current_user.id}.png", 'wb') as f:
-                f.write(file_bytes)
-            session.query(User).get(current_user.id).ico = 1
-            session.commit()
-        else:
-            return 'eeeee'  # TODO Придумать ошибку
+        if img.filename:
+            file_bytes = img.read()
+            if len(file_bytes) < MAX_FILE_SIZE:
+                with open(f"app/static/img/profile/{current_user.id}.png", 'wb') as f:
+                    f.write(file_bytes)
+                session.query(User).get(current_user.id).ico = 1
+                session.commit()
+            else:
+                return 'eeeee'  # TODO Придумать ошибку
 
-        return redirect('/main')
+        return redirect('/profile/settings')
     return render_template('profile_settings.html', title='Настройка профиля', cities=cities)
+
+
+@app.route('/delete-profile-img')
+def background_process_test():
+    session.query(User).get(current_user.id).ico = 0
+    session.commit()
+    try:
+        os.remove(f"app/static/img/profile/{current_user.id}.png")
+    except BaseException:
+        pass
+    return 'nothing'
 
 
 @app.route('/chat')
