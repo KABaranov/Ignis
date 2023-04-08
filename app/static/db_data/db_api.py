@@ -3,6 +3,7 @@ from flask import jsonify, request
 import hashlib
 from . import db_session
 from .__all_models import *
+from app import confirmation
 
 db_session.global_init("app/static/db/users.db")
 session = db_session.create_session()
@@ -45,6 +46,7 @@ def get_user_from_id(ident):
 def get_user_object(ident):
     user = session.query(User).filter(User.id == ident).first()
     return user
+
 
 def get_id_from_game(name):
     game = session.query(Game).filter(Game.name == name).first()
@@ -105,6 +107,18 @@ def update_profile(user, name, surname, age, city, look_for, about):
     session.delete(old_user)
     session.add(new_user)
     session.commit()
+
+
+def confirm_email(email):
+    user = session.query(User).filter(User.email == email).first()
+    if user.confirmed:
+        print('Account already confirmed. Please login.', 'success')
+    else:
+        user.confirmed = True
+        user.confirmed_on = datetime.datetime.now()
+        session.add(user)
+        session.commit()
+        print('You have confirmed your account. Thanks!', 'success')
 
 
 def get_user_friends(ident):

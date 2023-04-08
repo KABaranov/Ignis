@@ -24,13 +24,13 @@
         <div class="flex-col align-center just-spc-eve">
             <div class="flex-col">
                 <div class="txt-type-2">Фамилия</div>
-                <input type="text" name="surname" class="input-1" placeholder="Фамилия" maxlength="15" value="{{ current_user.surname }}">
+                <input type="text" name="surname" class="input-1" placeholder="Фамилия" maxlength="15" value="{% if current_user.about != None %}{{current_user.surname}}{% endif %}">
                 <div class="txt-type-2">Имя</div>
-                <input type="text" name="name" class="input-1" placeholder="Имя" maxlength="15" value="{{ current_user.name }}">
+                <input type="text" name="name" class="input-1" placeholder="Имя" maxlength="15" value="{% if current_user.name != None %}{{current_user.name}}{% endif %}">
                 <div class="txt-type-2">Возраст</div>
-                <input type="number" name="age" class="input-1" placeholder="Возраст" min="10" max="99" value="{{ current_user.age }}">
+                <input type="number" name="age" class="input-1" placeholder="Возраст" min="10" max="99" value="{% if current_user.age != None %}{{current_user.age}}{% endif %}">
                 <div class="txt-type-2">Город</div>
-                <input type="text" class="input-1" name="city" id="city" list="cities" placeholder="Не обязательно" value="{{ current_user.city }}">
+                <input type="text" class="input-1" name="city" id="city" list="cities" placeholder="Не обязательно" value="{% if current_user.city != None %}{{current_user.city}}{% endif %}">
                 <datalist id="cities">
                 {% for i in cities %}
                     {% for j in cities[i] %}
@@ -62,7 +62,7 @@
                 <input type="button" value="Удалить" name="delete" id="delete" class="btn-2" style="margin-top: 10px;">
             </div>
             <label for="about" class="txt-type-2">О себе</label>
-            <textarea name="about" id="about" class="input-1" placeholder="Будет отображаться в профиле" maxlength="300" style="width: 100%; min-height: max-content; resize: none;" rows="5">{{current_user.about}}</textarea>
+            <textarea name="about" id="about" class="input-1" placeholder="Будет отображаться в профиле" maxlength="300" style="width: 100%; min-height: max-content; resize: none;" rows="5">{% if current_user.about != None %}{{current_user.about}}{% endif %}</textarea>
         </div>
     </form>
 {% endblock %}

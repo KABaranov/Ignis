@@ -23,6 +23,8 @@ class User(SqlAlchemyBase, UserMixin):
     ico = sqlalchemy.Column(sqlalchemy.Integer, default=0)
     # Заполнен ли профиль
     full = sqlalchemy.Column(sqlalchemy.Integer, default=0)
+    confirmed = sqlalchemy.Column(sqlalchemy.Integer, default=0)
+    confirmed_on = sqlalchemy.Column(sqlalchemy.DateTime, nullable=True)
 
 
 class Team(SqlAlchemyBase):

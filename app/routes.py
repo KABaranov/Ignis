@@ -2,9 +2,12 @@ from flask import *
 from app import app
 from flask_wtf import CSRFProtect
 import json
+
+from .decorators import check_confirmed
 from .static.db_data.db_api import *
 from flask_login import LoginManager, login_user, logout_user, login_required, current_user
 import os
+from app import confirmation, email
 
 csrf = CSRFProtect(app)
 
@@ -24,7 +27,41 @@ def load_user(user_id):
 def test():
     with open('app/static/json/cities.json', 'r', encoding='utf-8') as f:
         cities = json.load(f)
+    token = confirmation.generate_confirmation_token(current_user.email)
+    html = render_template('user/activate.html', confirm_url=token)
+    subject = "Подтвердите аккаунт"
+    email.send_email(current_user.email, subject, html)
     return render_template('find.html', title='Поиск', cities=cities, gamelist=get_games())
+
+
+@app.route('/unconfirmed')
+@login_required
+def unconfirmed():
+    if current_user.confirmed:
+        return redirect('/profile/settings')
+    flash('Пожалуйста, подтвердите аккаунт!', 'warning')
+    return render_template('user/unconfirmed.html')
+
+
+@app.route('/confirm/<token>')
+@login_required
+def confirm(token):
+    try:
+        user_email = confirmation.confirm_token(token)
+    except:
+        flash('The confirmation link is invalid or has expired.', 'danger')
+    confirm_email(user_email)
+    return redirect('/')
+
+
+@app.route('/unconfirmed/resend-confirm')
+@login_required
+def resend_confirm():
+    token = confirmation.generate_confirmation_token(current_user.email)
+    html = render_template('user/activate.html', confirm_url=token)
+    subject = "Подтвердите аккаунт"
+    email.send_email(current_user.email, subject, html)
+    return 'Проверьте почту'
 
 
 @app.route('/')
@@ -58,11 +95,15 @@ def logout():
 def regin():
     if request.method == 'POST':
         nickname = request.form.get('nickname')
-        email = request.form.get('email')
+        user_email = request.form.get('email')
         password = request.form.get('password-1')
-        reg = db_reg(nickname, email, password)
+        reg = db_reg(nickname, user_email, password)
         if reg == 'SUCCESS':
-            return redirect('/log-in')
+            token = confirmation.generate_confirmation_token(user_email)
+            html = render_template('user/activate.html', confirm_url=token)
+            subject = "Подтвердите аккаунт"
+            email.send_email(user_email, subject, html)
+            return redirect('/unconfirmed')
         elif reg == 'TOO_MANY_SYMBOLS':
             return render_template('reg-in.html', message='Имя пользователя должно быть меньше 15 символов')
         elif reg == 'USER_EXISTS':
@@ -72,6 +113,7 @@ def regin():
 
 @app.route('/main')
 @login_required
+@check_confirmed
 def main():
     with open('app/static/json/cities.json', 'r', encoding='utf-8') as f:
         cities = json.load(f)
@@ -80,12 +122,14 @@ def main():
 
 @app.route('/main/<int:ident>')
 @login_required
+@check_confirmed
 def ident(ident):
     return render_template('main.html', username=get_user_from_id(ident))
 
 
 @app.route('/profile/choose-game', methods=['GET', 'POST'])
 @login_required
+@check_confirmed
 def choose_game():
     if request.method == 'POST':
         add_games_to_user(request.form.getlist('game'), current_user)
@@ -96,6 +140,7 @@ def choose_game():
 
 @app.route('/profile/settings', methods=['GET', 'POST'])
 @login_required
+@check_confirmed
 def profile_settings():
     with open('app/static/json/cities.json', 'r', encoding='utf-8') as f:
         cities = json.load(f)
@@ -127,6 +172,7 @@ def profile_settings():
 
 
 @app.route('/delete-profile-img')
+@check_confirmed
 def background_process_test():
     session.query(User).get(current_user.id).ico = 0
     session.commit()
@@ -139,12 +185,14 @@ def background_process_test():
 
 @app.route('/chat')
 @login_required
+@check_confirmed
 def chat():
     return render_template('chat.html', title='Мессенджер')
 
 
 @app.route('/team/<link>')
 @login_required
+@check_confirmed
 def team_search(link):
     if link.isalpha():
         render_template('')
@@ -152,6 +200,7 @@ def team_search(link):
 
 @app.route('/profile/<int:ident>/games')
 @login_required
+@check_confirmed
 def games(ident):
     return render_template('games.html', nickname=get_user_from_id(ident), usergames=get_user_games(ident),
                            gamelist=get_games(), ident=ident)
@@ -159,6 +208,7 @@ def games(ident):
 
 @app.route('/profile/<int:ident>/teams')
 @login_required
+@check_confirmed
 def teams(ident):
     return render_template('teams.html', nickname=get_user_from_id(ident),
                            teamlist=get_user_teams(ident), ident=ident)
@@ -166,6 +216,7 @@ def teams(ident):
 
 @app.route('/profile/<int:ident>/friends')
 @login_required
+@check_confirmed
 def friends(ident):
     friendlist = get_user_friends(ident)
     return render_template('friends.html', nickname=get_user_from_id(ident),
@@ -174,6 +225,7 @@ def friends(ident):
 
 @app.route('/create-team', methods=['GET', 'POST'])
 @login_required
+@check_confirmed
 def create_team():
     if request.method == 'POST':
         name = request.form.get('name')
@@ -190,6 +242,7 @@ def create_team():
 
 @app.route('/profile/<int:ident>')
 @login_required
+@check_confirmed
 def profile(ident):
     user = get_user_object(ident)
     m = ['Января', 'Февраля', 'Марта', 'Апреля', 'Мая', 'Июня', 'Июля', 'Августа',

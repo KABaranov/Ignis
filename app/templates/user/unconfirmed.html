@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <title>Подтвердите аккаунт</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="flex-col align-center just-center marg-auto" style="width: 70vw; height: 40vh">
+    <h1 class="txt-cl-p1" style="font-size: 48px; font-weight: 1000;">Добро пожаловать!</h1>
+    <br>
+    <p class="txt-center txt-type-2" style="margin: 30px;">Вы ещё не подтвердили свой аккаунт. Пожалуйста, проверьте свою почту (в том числе папку Спам) - Вы должны получить письмо с подтверждением.</p>
+    <p class="txt-type-5">Не получили письмо? <a class="txt-cl-s1" href="/unconfirmed/resend-confirm">Отправить ещё раз</a>.</p>
+</div>
+
+{% endblock %}
