@@ -237,7 +237,7 @@ def create_team():
             return redirect(f'/profile/{current_user.id}/teams')
         # TODO придумать ошибку
         return 'придумать ошибку'
-    return render_template('create_team.html', gamelist=get_games())
+    return render_template('create_team.html', gamelist=get_games(), title='Создание команды')
 
 
 @app.route('/profile/<int:ident>')

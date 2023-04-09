@@ -3,15 +3,43 @@
     <title>Профиль</title>
 {% endblock %}
 {% block content %}
-    {% if user.ico == 0 %}
-        <div class="nav-user-ico txt-type-4 bg-cl-m7 txt-center">
-            <div style="background: url(/static/img/profile/0.png) no-repeat center; background-size: cover; width: 100%; height: 100%; border-radius: 100%;"></div>
-        </div>
-    {% else %}
-        <div class="nav-user-ico txt-type-4 bg-cl-m7 txt-center">
-            <div style="background: url(/static/img/profile/{{ user.id }}.png) no-repeat center; background-size: cover; width: 100%; height: 100%; border-radius: 100%;"></div>
-        </div>
+    <div class="flex-row align-end">
+        {% if user.id == current_user.id %}
+            <a href="/profile/settings">
+                <svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M14.8458 26H10.156C9.55057 26 9.02676 25.5749 8.8972 24.9782L8.37282 22.529C7.67327 22.2197 7.00996 21.833 6.3951 21.3759L4.02829 22.1364C3.45108 22.3221 2.82361 22.077 2.52085 21.5475L0.170786 17.4512C-0.128657 16.9215 -0.0254929 16.2532 0.419449 15.8405L2.25544 14.1505C2.17194 13.3849 2.17194 12.6125 2.25544 11.8469L0.419449 10.1608C-0.0261483 9.74788 -0.129353 9.07884 0.170786 8.5488L2.5157 4.4499C2.81845 3.92041 3.44593 3.67528 4.02314 3.861L6.38995 4.6215C6.7044 4.3864 7.03175 4.16939 7.37043 3.9715C7.69555 3.7865 8.03014 3.619 8.37282 3.4697L8.89849 1.0231C9.02742 0.426359 9.55067 0.000642711 10.156 0H14.8458C15.4511 0.000642711 15.9744 0.426359 16.1033 1.0231L16.6341 3.471C16.9959 3.63157 17.3482 3.813 17.6893 4.0144C18.0075 4.20006 18.315 4.40361 18.6105 4.6241L20.9786 3.8636C21.5555 3.67857 22.1822 3.92361 22.4848 4.4525L24.8297 8.5514C25.1291 9.08113 25.026 9.74937 24.581 10.1621L22.745 11.8521C22.8285 12.6177 22.8285 13.3901 22.745 14.1557L24.581 15.8457C25.026 16.2584 25.1291 16.9267 24.8297 17.4564L22.4848 21.5553C22.1822 22.0842 21.5555 22.3292 20.9786 22.1442L18.6105 21.3837C18.3109 21.6064 17.9995 21.8125 17.6777 22.0012C17.3399 22.1987 16.9915 22.3771 16.6341 22.5355L16.1033 24.9782C15.9738 25.5744 15.4507 25.9995 14.8458 26ZM6.85764 18.4977L7.91414 19.2777C8.1523 19.4547 8.40053 19.6175 8.65755 19.7652C8.89939 19.9065 9.1484 20.035 9.40354 20.15L10.6056 20.6817L11.1944 23.4H13.8099L14.3987 20.6804L15.6008 20.1487C16.1256 19.9152 16.6237 19.6249 17.0863 19.2829L18.1441 18.5029L20.7738 19.3479L22.0815 17.0625L20.042 15.1866L20.1863 13.871C20.2496 13.2956 20.2496 12.7148 20.1863 12.1394L20.042 10.8238L22.0828 8.944L20.7738 6.6573L18.1441 7.5023L17.0863 6.7223C16.6235 6.37872 16.1255 6.08628 15.6008 5.85L14.3987 5.3183L13.8099 2.6H11.1944L10.6031 5.3196L9.40354 5.85C9.14819 5.96316 8.89915 6.09031 8.65755 6.2309C8.40211 6.37823 8.15519 6.54012 7.91801 6.7158L6.86022 7.4958L4.23186 6.6508L2.92154 8.944L4.9611 10.8173L4.8168 12.1342C4.75341 12.7096 4.75341 13.2904 4.8168 13.8658L4.9611 15.1814L2.92154 17.0573L4.22928 19.3427L6.85764 18.4977ZM12.4957 18.2C9.64945 18.2 7.34209 15.8719 7.34209 13C7.34209 10.1281 9.64945 7.8 12.4957 7.8C15.342 7.8 17.6494 10.1281 17.6494 13C17.6458 15.8704 15.3405 18.1964 12.4957 18.2ZM12.4957 10.4C11.088 10.4014 9.94196 11.5425 9.92178 12.9627C9.90161 14.383 11.0148 15.5567 12.4219 15.5989C13.829 15.641 15.0092 14.5359 15.0726 13.117V13.637V13C15.0726 11.5641 13.9189 10.4 12.4957 10.4Z" fill="#FF5C5C"/>
+                </svg>
+            </a>
+        {% endif %}
+        {% if user.ico == 0 %}
+            <div class="nav-user-ico txt-type-4 bg-cl-m7 txt-center">
+                <div style="background: url(/static/img/profile/0.png) no-repeat center; background-size: cover; width: 100%; height: 100%; border-radius: 100%;"></div>
+            </div>
+        {% else %}
+            <div class="nav-user-ico txt-type-4 bg-cl-m7 txt-center">
+                <div style="background: url(/static/img/profile/{{ user.id }}.png) no-repeat center; background-size: cover; width: 100%; height: 100%; border-radius: 100%;"></div>
+            </div>
+        {% endif %}
+        <div class="txt-type-1 txt-cl-p1 txt-medium bg-cl-m7" style="padding: 5px;">{{ user.nickname }}</div>
+        <div class="txt-type-3 bg-cl-m7 txt-regular" style="padding: 5px;">Участвует с {{ date }}</div>
+    </div>
+    {% if user.id != current_user.id %}
+        <button class="btn-2">Добавить в друзья</button>
     {% endif %}
-    <div class="txt-type-1 txt-cl-p1 txt-medium bg-cl-m7" style="padding: 5px;">{{ user.nickname }}</div>
-    <div class="txt-type-3 bg-cl-m7 txt-regular" style="padding: 5px;">Участвует с {{ date }}</div>
+    <div class="flex-row just-spc-btw" style="width: 75vw;">
+        <div class="flex-col bg-cl-m6" style="width: 60vw;">
+            <div class="txt-type-1" style="padding: 5px 10px;">О себе</div>
+            {% if user.about != None and user.about != '' %}
+                <div class="txt-type-3 txt-regular" style="width: 100%; padding: 10px 15px">{{user.about}}</div>
+            {% else %}
+                <div class="txt-type-3 txt-regular txt-cl-m4" style="width: 100%; padding: 10px 15px">Здесь пока ничего нет</div>
+            {% endif %}
+        </div>
+        <div class="flex-col txt-type-2 txt-regular bg-cl-m6" style="padding: 20px; width: 11vw;">
+            <a href="/profile/{{user.id}}/teams">Команды</a>
+            <a href="/profile/{{user.id}}/friends">Друзья</a>
+            <a href="/profile/{{user.id}}/games">Игры</a>
+        </div>
+    </div>
+
 {% endblock %}
